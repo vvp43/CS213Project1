@@ -2,6 +2,7 @@ package eventcalendar;
 
 /**
  * This class is the main driver, which executes the whole program
+ * @author vvp43
  */
 
 

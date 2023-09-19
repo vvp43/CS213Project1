@@ -27,7 +27,7 @@ public class Event implements Comparable<Event>{
     @Override
     public int compareTo (Event a){
         if (this.date.compareTo(a.date)!=0){
-            ret
+
         }
     }
 }

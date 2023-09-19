@@ -21,7 +21,7 @@ public class Event implements Comparable<Event>{
 
     @Override
     public String toString(){
-        return date + " " + startTime + " " + location + " " + contact + " " + duration;
+        return "[Event Date: "date + "][Start: " + startTime + "][End: " + startTime+duration + "]@" + location + "[" + contact + "]";
     }
 
     @Override

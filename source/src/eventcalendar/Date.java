@@ -13,10 +13,6 @@ public class Date implements Comparable<Date> {
     /*
         NOTE: THIS METHOD IS NOT COMPLETE,
         still need to test for a valid calendar date and return an error, like 13/32/2005
-
-
-
-
      */
     public boolean isValid() {
 

@@ -1,5 +1,7 @@
 package eventcalendar;
 
+import java.util.Calendar;
+
 /**
  * This class defines the instance variables, constructors, a
  * @author vvp43
@@ -21,7 +23,15 @@ public class Event implements Comparable<Event>{
 
     @Override
     public String toString(){
-        return "[Event Date: "date + "][Start: " + startTime + "][End: " + startTime+duration + "]@" + location + "[" + contact + "]";
+        return "[Event Date: "+(date.curr.get(Calendar.MONTH)+1)+"/" +(date.curr.get
+                (Calendar.DAY_OF_MONTH))+"/"+(date.curr.get(Calendar.YEAR))+
+
+                "][Start: "+startTime.hour+":"+startTime.minute+"" //not able to implement am/pm yet
+
+                ;
+        // psuedocode reference
+        // return "[Event Date: "date + "][Start: " + startTime + "]
+        // [End: " + startTime+duration + "]@" + location + "[" + contact + "]";
     }
 
     @Override

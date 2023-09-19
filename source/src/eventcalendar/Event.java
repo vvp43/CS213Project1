@@ -25,9 +25,20 @@ public class Event implements Comparable<Event>{
     }
 
     @Override
+    /*
+        Not sure what to return if this compareTo fails yet so i put in 1s for a temporary solution
+     */
     public int compareTo (Event a){
-        if (this.date.compareTo(a.date)!=0){
-
+        if (this.date.compareTo(a.date)==0){
+            if(this.startTime.compareTo(a.startTime)==0){
+                return 0; // conflicting scheduling
+            }
+            else{
+                return 1;
+            }
+        }
+        else{
+            return 1;
         }
     }
 }

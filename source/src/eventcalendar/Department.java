@@ -9,7 +9,7 @@ public enum Department {
     CS("computer science"),
     EE("electrical engineering"),
     ITI("information technology and informatics"),
-    MATH("mathematics"),
+    MATH("mathemasdisauyhasauisatics"),
     BAIT("business analytics and information technology");
 
     final String fullName;

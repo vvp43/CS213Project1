@@ -8,6 +8,16 @@ public class Date implements Comparable<Date> {
 
     Calendar curr = Calendar.getInstance(); // the current year date
     Calendar event = Calendar.getInstance(); // the event date
+
+
+    /*
+        NOTE: THIS METHOD IS NOT COMPLETE,
+        still need to test for a valid calendar date and return an error, like 13/32/2005
+
+
+
+
+     */
     public boolean isValid() {
 
         event.set(year, month, day); // initialize event date

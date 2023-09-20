@@ -1,7 +1,7 @@
 package eventcalendar;
 import java.util.Calendar;
 
-public class Date implements Comparable<Date> {
+public class Date implements Comparable<Date> { // <--- no idea what this does
     private int year;
     private int month;
     private int day;

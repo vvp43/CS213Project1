@@ -44,11 +44,11 @@ public class Event implements Comparable<Event>{
                 return 0; // conflicting scheduling
             }
             else{
-                return 1;
+                return -1;
             }
         }
         else{
-            return 1;
+            return -1;
         }
     }
 }

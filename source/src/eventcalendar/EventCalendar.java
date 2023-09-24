@@ -31,25 +31,47 @@ public class EventCalendar {
 
     } //increase the capacity by 4
     public boolean add(Event event) {
-        int i = 0;
-        while(
-    }
-    public boolean remove(Event event) {
+        int temp = -1;
+        for(int i = 0; i < numEvents; i++){
+            if(events[i]== null) {
+                temp = i;
+                break;
+            }
+        }
+        if(temp == -1){
+            grow();
+            int temp2 = -1;
+            for(int i = 0; i < numEvents; i++){
+                if(events[i]== null) {
+                    temp2 = i;
+                    break;
+                }
+            }
+            events[temp2] = event;
+            return true;
+        }
+        else{
+            events[temp] = event;
+            return true;
+        }
 
     }
-    public boolean contains(Event event) {
-
-    }
-    public void print() {
-
-    } //print the array as is
-    public void printByDate() {
-
-    } //ordered by date and timeslot
-    public void printByCampus() {
-
-    } //ordered by campus and building/room
-    public void printByDepartment(){
-
-    } //ordered by department
+//    public boolean remove(Event event) {
+//
+//    }
+//    public boolean contains(Event event) {
+//
+//    }
+//    public void print() {
+//
+//    } //print the array as is
+//    public void printByDate() {
+//
+//    } //ordered by date and timeslot
+//    public void printByCampus() {
+//
+//    } //ordered by campus and building/room
+//    public void printByDepartment(){
+//
+//    } //ordered by department
 }

@@ -23,7 +23,12 @@ public class MainDriver {
         Timeslot b = Timeslot.MORNING;
 
         System.out.println(a.compareTo(b));
-        EventCalendar eventidoro = new EventCalendar();
+
+        EventCalendar abc = new EventCalendar();
+        Date bruh = new Date(2023, 8, 20);
+        //Event yup = new Event(bruh, Timeslot.MORNING, Location.AB2225, Contact
+        Contact ccc = new Contact(Department.CS, "CS@rutgers.edu");
+        System.out.println(ccc.isValid());
 
     }
 }

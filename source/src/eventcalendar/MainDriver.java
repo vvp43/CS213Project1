@@ -26,8 +26,10 @@ public class MainDriver {
 
         EventCalendar abc = new EventCalendar();
         Date bruh = new Date(2023, 8, 20);
-        //Event yup = new Event(bruh, Timeslot.MORNING, Location.AB2225, Contact
         Contact ccc = new Contact(Department.CS, "CS@rutgers.edu");
+        Event yup = new Event(bruh, Timeslot.MORNING, Location.AB2225, ccc, 60);
+
+
         System.out.println(ccc.isValid());
 
     }

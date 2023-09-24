@@ -19,6 +19,8 @@ public class EventCalendar {
         }
 
     } //search an event in the list
+
+
     private void grow() {
         int newNumofEvents = numEvents+4;
         Event[] newEvents = new Event[newNumofEvents];
@@ -30,6 +32,14 @@ public class EventCalendar {
         numEvents = newNumofEvents;
 
     } //increase the capacity by 4
+
+
+    /*
+
+        NOTE: dont know if add works yet, need to figure out if theres an easier way to implement
+        add using grow without having to reuse code.
+
+     */
     public boolean add(Event event) {
         int temp = -1;
         for(int i = 0; i < numEvents; i++){

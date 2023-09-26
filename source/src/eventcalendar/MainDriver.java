@@ -29,8 +29,17 @@ public class MainDriver {
         Contact ccc = new Contact(Department.CS, "CS@rutgers.edu");
         Event yup = new Event(bruh, Timeslot.MORNING, Location.AB2225, ccc, 60);
 
+        Date bruh2 = new Date(2023, 9, 29);
+        Contact ccc2 = new Contact(Department.CS, "EE@rutgers.edu");
+        Event yup2 = new Event(bruh2, Timeslot.AFTERNOON, Location.ARC103, ccc2, 30);
 
-        System.out.println(ccc.isValid());
+
+
+        abc.add(yup);
+        abc.add(yup2);
+        abc.add(yup2);
+        abc.print();
+        //System.out.println(ccc.isValid());
 
     }
 }

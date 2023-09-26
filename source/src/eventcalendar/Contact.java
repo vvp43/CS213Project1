@@ -9,6 +9,13 @@ public class Contact {
         this.email = email;
     }
 
+    public Department getDepartment(){
+        return department;
+    }
+
+    public String getEmail(){
+        return email;
+    }
     /*
         idk if were suppose to check for case sensitivity for department here because contact literally
         comes with department as one if its variables

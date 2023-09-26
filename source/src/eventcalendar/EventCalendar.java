@@ -72,9 +72,14 @@ public class EventCalendar {
 //    public boolean contains(Event event) {
 //
 //    }
-//    public void print() {
-//
-//    } //print the array as is
+    public void print() {
+        for(Event i : events){
+            if(i != null){
+                System.out.println(i.toString());
+            }
+        }
+
+    } //print the array as is
 //    public void printByDate() {
 //
 //    } //ordered by date and timeslot

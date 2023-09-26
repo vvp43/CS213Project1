@@ -23,16 +23,37 @@ public class Event implements Comparable<Event>{
 
     @Override
     public String toString(){
-        return "[Event Date: "+(date.curr.get(Calendar.MONTH)+1)+"/" +(date.curr.get
+        return
+                // Event date
+                "[Event Date: "+(date.curr.get(Calendar.MONTH)+1)+"/" +(date.curr.get
                 (Calendar.DAY_OF_MONTH))+"/"+(date.curr.get(Calendar.YEAR))+
 
-                "][Start: "+startTime.hour+":"+startTime.minute+"" //not able to implement am/pm yet
+                // start time, end time
+                        //NOTE need to figure out how to calculate end time
+                "][Start: "+startTime.hour+":"+startTime.minute+"pm][End: "+(startTime.minute+duration)+
 
-                ;
+                //building name and campus
+                "] @"+location+"("+location.buildingName+", "+location.campus+")[Contact: "+
+
+                // department and email
+                contact.getDepartment().fullName+", "+contact.getEmail()+"]";
+
+
+
         // psuedocode reference
         // return "[Event Date: "date + "][Start: " + startTime + "]
         // [End: " + startTime+duration + "]@" + location + "[" + contact + "]";
     }
+
+    @Override
+    public boolean equals(Object event){
+        Event realEvent = (Event)event;
+        if (this.date.compareTo(a.date)==0){
+            if(this.startTime.compareTo(a.startTime)==0){
+                
+            }
+    }
+
 
     @Override
     /*

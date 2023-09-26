@@ -46,12 +46,24 @@ public class Event implements Comparable<Event>{
     }
 
     @Override
-    public boolean equals(Object event){
-        Event realEvent = (Event)event;
-        if (this.date.compareTo(a.date)==0){
-            if(this.startTime.compareTo(a.startTime)==0){
-                
+    public boolean equals(Object event) {
+        Event realEvent = (Event) event;
+        if (this.date.compareTo(realEvent.date) == 0) {
+            if(this.startTime.compareTo(realEvent.startTime) == 0){
+                if(this.location.compareTo(realEvent.location) == 0){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
     }
 
 

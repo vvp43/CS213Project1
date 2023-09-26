@@ -12,17 +12,17 @@ import java.sql.Time;
 public class MainDriver {
     public static void main(String[] args) {
         //new EventOrganizer().run();
-        Timeslot a =  Timeslot.MORNING;
-        System.out.println(a);
-        System.out.printf("%d %d", a.hour, a.minute);
-        int h = 10;
-        int m = 30;
-        if(h == Timeslot.MORNING.hour && m == Timeslot.MORNING.minute){
-            System.out.println("BRUH");
-        }
-        Timeslot b = Timeslot.MORNING;
+//        Timeslot a =  Timeslot.MORNING;
+//        System.out.println(a);
+//        System.out.printf("%d %d", a.hour, a.minute);
+//        int h = 10;
+//        int m = 30;
+//        if(h == Timeslot.MORNING.hour && m == Timeslot.MORNING.minute){
+//            System.out.println("BRUH");
+//        }
+        //Timeslot b = Timeslot.MORNING;
 
-        System.out.println(a.compareTo(b));
+        //System.out.println(a.compareTo(b));
 
         EventCalendar abc = new EventCalendar();
         Date bruh = new Date(2023, 8, 20);
@@ -38,7 +38,12 @@ public class MainDriver {
         abc.add(yup);
         abc.add(yup2);
         abc.add(yup2);
-        abc.print();
+        System.out.println(yup.compareTo(yup));
+        System.out.println(yup.compareTo(yup2));
+
+        System.out.println(yup.equals(yup));
+        System.out.println(yup.equals(yup2));
+        //abc.print();
         //System.out.println(ccc.isValid());
 
     }

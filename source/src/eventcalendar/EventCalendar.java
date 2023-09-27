@@ -1,5 +1,11 @@
 package eventcalendar;
 
+/**
+ * This event calendar class uses
+ * an array-based implementation of a
+ * linear data structure to hold the list of events.
+ * @author Seth Yeh
+ */
 public class EventCalendar {
     private Event [] events; //the array holding the list of events
     private int numEvents; //current number of events in the array
@@ -15,7 +21,9 @@ public class EventCalendar {
         return NOT_FOUND;
     } //search an event in the list
 
-
+    /**
+     * grow() method
+     */
     private void grow() {
         int newNumofEvents = numEvents+4;
         Event[] newEvents = new Event[newNumofEvents];
@@ -29,8 +37,8 @@ public class EventCalendar {
     } //increase the capacity by 4
 
 
-    /*
-
+    /**
+        add() method
         NOTE: dont know if add works yet, need to figure out if theres an easier way to implement
         add using grow without having to reuse code.
 
@@ -75,6 +83,11 @@ public class EventCalendar {
     }
 
 
+    /**
+     * remove() method
+     * @param event
+     * @return
+     */
     public boolean remove(Event event) {
         if (!contains(event)) {
             return false;
@@ -112,9 +125,19 @@ public class EventCalendar {
         }
         return true;
     }
+
+    /**
+     * contains() method
+     * @param event
+     * @return
+     */
     public boolean contains(Event event) {
         return find(event) != NOT_FOUND;
     }
+
+    /**
+     * print() method
+     */
     public void print() {
         for(Event i : events){
             if(i != null){

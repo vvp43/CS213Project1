@@ -1,6 +1,11 @@
 package eventcalendar;
 import java.util.Calendar;
 
+/**
+ * This Date class retrieves information
+ * about date which contains year, month and day
+ * @author Seth Yeh
+ */
 public class Date implements Comparable<Date> { // <--- no idea what this does
     private int year;
     private int month;
@@ -8,6 +13,12 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
     final Calendar curr = Calendar.getInstance(); // the current year date
     Calendar event = Calendar.getInstance(); // the event date
 
+    /**
+     * Constructor with param year, month and day
+     * @param year
+     * @param month
+     * @param day
+     */
     public Date(int year, int month, int day){
         this.year = year;
         this.month = month;
@@ -15,6 +26,11 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         event.set(year, month, day);
     }
 
+    /**
+     * add() method
+     * @param minutes
+     * @return
+     */
     public String add (int minutes){
         Calendar temp = Calendar.getInstance();
         temp = event;
@@ -29,6 +45,11 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         return hour+":"+minutes+ampm;
     }
 
+    /**
+     * compareTo() method
+     * @param input the object to be compared.
+     * @return
+     */
     @Override
     public int compareTo(Date input){
         if(event.compareTo(input.event) == 0) {
@@ -47,18 +68,18 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      */
     public boolean isValid() {
 
-            if(curr.after(event)){ // checks if event date is in the past
+        if(curr.after(event)){ // checks if event date is in the past
+            return false;
+        }
+        else {
+            Calendar temp = Calendar.getInstance();
+            temp.add(Calendar.MONTH, 6); // add 6 months to current date for next part
+            if(event.after(temp)){ // check to see if event date is within 6 months of the current date
                 return false;
             }
             else {
-                Calendar temp = Calendar.getInstance();
-                temp.add(Calendar.MONTH, 6); // add 6 months to current date for next part
-                if(event.after(temp)){ // check to see if event date is within 6 months of the current date
-                    return false;
-                }
-                else {
-                    return true;
-                }
+                return true;
             }
         }
     }
+}

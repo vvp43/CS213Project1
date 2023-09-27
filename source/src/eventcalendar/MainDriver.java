@@ -51,7 +51,7 @@ public class MainDriver {
 //        System.out.println(yup.equals(yup));
 //        System.out.println(yup.equals(yup2));
 
-        System.out.println(abc.remove(yup3));
+        System.out.println(abc.remove(yup2));
         abc.print();
 //        System.out.println(abc.contains(yup));
 //        System.out.println(abc.contains(yup3));

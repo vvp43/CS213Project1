@@ -36,30 +36,42 @@ public class EventCalendar {
 
      */
     public boolean add(Event event) {
-        int temp = -1;
-        for(int i = 0; i < numEvents; i++){
-            if(events[i]== null) {
-                temp = i;
-                break;
-            }
-        }
-        if(temp == -1){
+        if(numEvents == 0){
             grow();
-            int temp2 = -1;
-            for(int i = 0; i < numEvents; i++){
-                if(events[i]== null) {
-                    temp2 = i;
-                    break;
-                }
-            }
-            events[temp2] = event;
-            return true;
-        }
-        else{
-            events[temp] = event;
+            events[0] = event;
             return true;
         }
 
+
+        else {
+            if (!contains(event)) {
+                int temp = -1;
+                for (int i = 0; i < numEvents; i++) {
+                    if (events[i] == null) {
+                        temp = i;
+                        break;
+                    }
+                }
+                if (temp == -1) {
+                    grow();
+                    int temp2 = -1;
+                    for (int i = 0; i < numEvents; i++) {
+                        if (events[i] == null) {
+                            temp2 = i;
+                            break;
+                        }
+                    }
+                    events[temp2] = event;
+                    return true;
+                } else {
+                    events[temp] = event;
+                    return true;
+                }
+            }
+            else{
+                return false;
+            }
+        }
     }
 
 

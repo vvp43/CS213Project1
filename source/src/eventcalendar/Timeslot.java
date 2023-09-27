@@ -12,6 +12,7 @@ public enum Timeslot {
 
     final int hour;
     final int minute;
+
     /**
      * Property: display hour and minute
      * @param hour: hour of timeslot

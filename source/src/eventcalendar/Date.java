@@ -15,6 +15,19 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         event.set(year, month, day);
     }
 
+    public String add (int minutes){
+        Calendar temp = Calendar.getInstance();
+        temp = event;
+        temp.add(Calendar.MINUTE, minutes);
+
+        int hour = temp.get(Calendar.HOUR);
+        int min = temp.get(Calendar.MINUTE);
+
+        String ampm = (temp.get(Calendar.AM_PM) == Calendar.AM) ? "am" : "pm";
+        hour = (hour == 0) ? 12 : hour;
+
+        return hour+":"+minutes+ampm;
+    }
 
     @Override
     public int compareTo(Date input){

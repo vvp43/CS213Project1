@@ -23,6 +23,7 @@ public class Event implements Comparable<Event>{
 
     @Override
     public String toString(){
+        String s = "][End: ";
         return
                 // Event date
                 "[Event Date: "+(date.curr.get(Calendar.MONTH)+1)+"/" +(date.curr.get
@@ -30,10 +31,10 @@ public class Event implements Comparable<Event>{
 
                 // start time, end time
                         //NOTE need to figure out how to calculate end time
-                "][Start: "+startTime.hour+":"+startTime.minute+"pm][End: "+(startTime.minute+duration)+
+                "] [Start: "+startTime.hour+":"+startTime.minute+startTime.ampm+"] [End: "+date.add(duration)+
 
                 //building name and campus
-                "] @"+location+"("+location.buildingName+", "+location.campus+")[Contact: "+
+                "] @"+location+" ("+location.buildingName+", "+location.campus+") [Contact: "+
 
                 // department and email
                 contact.getDepartment().fullName+", "+contact.getEmail()+"]";

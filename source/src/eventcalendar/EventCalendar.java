@@ -3,21 +3,16 @@ package eventcalendar;
 public class EventCalendar {
     private Event [] events; //the array holding the list of events
     private int numEvents; //current number of events in the array
+    public static final int NOT_FOUND = -1;
     private int find(Event event) {
-        events = new Event[numEvents];
-        int temp = -1;
-        for(int i = 0; i < numEvents; i++){
-            if(events[i].compareTo(event)==0) {
-                temp = i;
+        for(Event i : events){
+            if(i != null){
+                if(i.equals(event)){
+                    return 0;
+                }
             }
         }
-        if(temp != -1){
-            return temp;
-        }
-        else{
-            return -1;
-        }
-
+        return NOT_FOUND;
     } //search an event in the list
 
 
@@ -66,12 +61,48 @@ public class EventCalendar {
         }
 
     }
-//    public boolean remove(Event event) {
-//
-//    }
-//    public boolean contains(Event event) {
-//
-//    }
+
+
+    public boolean remove(Event event) {
+        if (!contains(event)) {
+            return false;
+        }
+        else {
+            int index = 0;
+            for(Event e : events){
+                if(e != null){
+                    if(e.equals(event)){
+                        break;
+                    }
+                }
+                index++;
+            }
+            /*
+                NOTE: idk if this accounts for every case where the number of
+                events that are equal to theindex
+            */
+            if(index == numEvents-1){
+                events[index] = null;
+            }
+            else{
+                events[index] = null;
+                for(int j = index; j < numEvents-1; j++){
+                    if(events[j+1] != null) {
+                        events[j] = events[j+1];
+                    }
+                    else{
+                        events[j] = null;
+                    }
+                }
+                return true;
+            }
+
+        }
+        return true;
+    }
+    public boolean contains(Event event) {
+        return find(event) != NOT_FOUND;
+    }
     public void print() {
         for(Event i : events){
             if(i != null){

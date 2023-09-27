@@ -29,6 +29,8 @@ public class MainDriver {
         Contact ccc = new Contact(Department.CS, "CS@rutgers.edu");
         Event yup = new Event(bruh, Timeslot.MORNING, Location.AB2225, ccc, 60);
 
+        Event yup3 = new Event(bruh, Timeslot.MORNING, Location.MU302, ccc, 60);
+
         Date bruh2 = new Date(2023, 9, 29);
         Contact ccc2 = new Contact(Department.CS, "EE@rutgers.edu");
         Event yup2 = new Event(bruh2, Timeslot.AFTERNOON, Location.ARC103, ccc2, 30);
@@ -38,12 +40,23 @@ public class MainDriver {
         abc.add(yup);
         abc.add(yup2);
         abc.add(yup2);
-        System.out.println(yup.compareTo(yup));
-        System.out.println(yup.compareTo(yup2));
+        abc.add(yup2);
 
-        System.out.println(yup.equals(yup));
-        System.out.println(yup.equals(yup2));
-        //abc.print();
+//        abc.add(yup3);
+        abc.print();
+//        System.out.println(yup.compareTo(yup));
+//        System.out.println(yup.compareTo(yup2));
+//        System.out.println(yup.compareTo(yup3));
+
+//        System.out.println(yup.equals(yup));
+//        System.out.println(yup.equals(yup2));
+
+        System.out.println(abc.remove(yup3));
+        abc.print();
+//        System.out.println(abc.contains(yup));
+//        System.out.println(abc.contains(yup3));
+
+
         //System.out.println(ccc.isValid());
 
     }

@@ -29,19 +29,11 @@ public class Event implements Comparable<Event>{
         this.duration = duration;
     }
 
-    /**
-     * TEST CONSTRUCTOR
-     * Constructor with startTime as param
-     * @param startTime
-     */
-    public Event(Timeslot startTime){
-        this.startTime = startTime;
-    }
 
     /**
      * This method is used to calculate endTime
      * @param  int duration in min
-     * @return end Hour
+     * @return an array of endTime where endTime[0] is hour and endTime[1] is minute
      */
     public int[] endTime(int startHour, int startMin, int dur){
         //store start hour and start minute in 2 elements array
@@ -57,8 +49,6 @@ public class Event implements Comparable<Event>{
         //return
         return time;
     }
-
-
 
     /**
      * toString() method
@@ -139,16 +129,20 @@ public class Event implements Comparable<Event>{
      * @param args
      */
     public static void main(String[] args) {
-//        Event e  = new Event(Timeslot.MORNING);
-//        int h = e.startTime.hour;
-//        int m = e.startTime.minute;
-//        int[] endTime = e.endTime(h,m,240);
-//        System.out.println("Start at "+ h +":"+m);
-//        System.out.println("End at " + endTime[0] +":"+ endTime[1]);
         Event a = new Event(new Date(2023, 9, 29),
                                 Timeslot.AFTERNOON,
                                 Location.HILL114,
                                 new Contact(Department.CS, "cs@rutgers.edu"), 90);
+        Event b = new Event(new Date(2023, 9, 29),
+                Timeslot.AFTERNOON,
+                Location.HILL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+        Event c = new Event(new Date(2023, 9, 29),
+                Timeslot.MORNING,
+                Location.HILL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
         System.out.println(a.toString());
+        System.out.println(a.compareTo(b));
+        System.out.println(a.compareTo(c));
     }
 }

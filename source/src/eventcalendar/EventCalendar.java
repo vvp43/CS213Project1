@@ -10,6 +10,12 @@ public class EventCalendar {
     private Event [] events; //the array holding the list of events
     private int numEvents; //current number of events in the array
     public static final int NOT_FOUND = -1;
+
+    /**
+     * find() method
+     * @param event
+     * @return
+     */
     private int find(Event event) {
         for(Event i : events){
             if(i != null){

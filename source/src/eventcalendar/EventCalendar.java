@@ -153,6 +153,19 @@ public class EventCalendar {
 
     } //print the array as is
 //    public void printByDate() {
+//        if(events[0] != null){
+//            int newNumofEvents = numEvents;
+//            Event[] newEvents = new Event[newNumofEvents];
+//            Event greatest = events[0];
+//
+//            for(Event i : events){
+//                if(i.compareTo())
+//
+//
+//        }
+//
+//
+//        }
 //
 //    } //ordered by date and timeslot
 //    public void printByCampus() {
@@ -161,4 +174,5 @@ public class EventCalendar {
 //    public void printByDepartment(){
 //
 //    } //ordered by department
+
 }

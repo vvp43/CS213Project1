@@ -15,11 +15,12 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * Constructor with param year, month and day
+     *
      * @param year
      * @param month
      * @param day
      */
-    public Date(int year, int month, int day){
+    public Date(int year, int month, int day) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -28,10 +29,11 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * add() method
+     *
      * @param minutes
      * @return
      */
-    public String add (int minutes){
+    public String add(int minutes) {
         Calendar temp = Calendar.getInstance();
         temp = event;
         temp.add(Calendar.MINUTE, minutes);
@@ -42,21 +44,28 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         String ampm = (temp.get(Calendar.AM_PM) == Calendar.AM) ? "am" : "pm";
         hour = (hour == 0) ? 12 : hour;
 
-        return hour+":"+minutes+ampm;
+        return hour + ":" + minutes + ampm;
     }
 
     /**
      * compareTo() method
+     *
      * @param input the object to be compared.
      * @return
      */
     @Override
-    public int compareTo(Date input){
-        if(event.compareTo(input.event) == 0) {
+    public int compareTo(Date input) {
+        if (event.compareTo(input.event) < 0){
+            return -1;
+        }
+        else if(event.compareTo(input.event) > 0){
+            return 1;
+        }
+        else{
             return 0;
         }
-        return -1;
     }
+
 
 
     /**
@@ -144,6 +153,8 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         Date a = new Date(2023, 9, 31);
         Date b = new Date(2023, 9, 29);
         Date c = new Date(2024, 2, 29);
+
+        Date d = new Date(2024, 2, 29);
         System.out.println(a.isLeapYear(a.year));
         Calendar date = Calendar.getInstance();
 //        date.set(2023, 9, 31);
@@ -155,6 +166,12 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         System.out.println(a.isValidDay(a.year, a.month, a.day));
         System.out.println(b.isValidDay(b.year, b.month, b.day));
         System.out.println(c.isValidDay(c.year, c.month, c.day));
+
+        System.out.println(a.compareTo(b));
+        System.out.println(b.compareTo(a));
+        System.out.println(a.compareTo(a));
+
+        System.out.println(c.compareTo(d));
 
 
 

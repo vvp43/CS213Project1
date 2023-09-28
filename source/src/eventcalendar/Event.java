@@ -1,5 +1,6 @@
 package eventcalendar;
 
+import java.sql.SQLOutput;
 import java.util.Calendar;
 
 /**
@@ -90,18 +91,9 @@ public class Event implements Comparable<Event>{
      *Not sure what to return if this compareTo fails yet so i put in -1s for a temporary solution
      */
     @Override
-    public int compareTo (Event a){
-        if (this.date.compareTo(a.date)==0){
-            if(this.startTime.compareTo(a.startTime)==0){
-                return 0; // conflicting scheduling
-            }
-            else{
-                return -1;
-            }
-        }
-        else{
-            return -1;
-        }
+    public int compareTo (Event a) {
+        System.out.println("are dates equal?: "+date.compareTo(a.date));
+        return -40;
     }
 
     /**
@@ -130,19 +122,33 @@ public class Event implements Comparable<Event>{
      */
     public static void main(String[] args) {
         Event a = new Event(new Date(2023, 9, 29),
-                                Timeslot.AFTERNOON,
-                                Location.HILL114,
-                                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+                Timeslot.AFTERNOON,
+                Location.HILL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
         Event b = new Event(new Date(2023, 9, 29),
                 Timeslot.AFTERNOON,
                 Location.HILL114,
                 new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
         Event c = new Event(new Date(2023, 9, 29),
+                Timeslot.EVENING,
+                Location.HILL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+        Event d = new Event(new Date(2023, 9, 29),
                 Timeslot.MORNING,
                 Location.HILL114,
                 new Contact(Department.CS, "cs@rutgers.edu"), 90);
         System.out.println(a.toString());
-        System.out.println(a.compareTo(b));
+
+        System.out.println(a.compareTo(d)); // should be 1
+
         System.out.println(a.compareTo(c));
+
+        System.out.println(a.compareTo(b));
+
+
+
     }
 }

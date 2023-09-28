@@ -124,15 +124,9 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int y = event.get(Calendar.YEAR);
         int m = event.get(Calendar.MONTH);
         int d = event.get(Calendar.DAY_OF_MONTH);
-        // checks if event date is valid
+        //1st step: checks if event date is valid
         if(isValidDay(y, m, d) && isValidMonth(m)){
-
-        }
-        // checks if event date is in the past
-        else if(curr.after(event)){ // checks if event date is in the past
-            return false;
-        }
-        else {
+        //2n step: checks if event date is in the past
             Calendar temp = Calendar.getInstance();
             temp.add(Calendar.MONTH, 6); // add 6 months to current date for next part
             if(event.after(temp)){ // check to see if event date is within 6 months of the current date

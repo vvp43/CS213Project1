@@ -6,10 +6,10 @@ package eventcalendar;
  * @author Vinh Pham
  */
 public enum Location {
-    HILL114("Hill Center","Busch"),
+    HLL114("Hill Center","Busch"),
     ARC103("Alison Road Classroom", "Busch"),
     BE_AUD("Beck Hall", "Livingston"),
-    TIL232("Tillett Hall", "College Avenue"),
+    TIL232("Tillett Hall", "Livingston"),
     AB2225("Academic Building", "College Avenue"),
     MU302("Murray Hall", "College Avenue");
 

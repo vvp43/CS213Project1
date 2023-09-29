@@ -1,5 +1,7 @@
 package eventcalendar;
 
+import javax.xml.namespace.QName;
+
 /**
  * This event calendar class uses
  * an array-based implementation of a
@@ -104,7 +106,7 @@ public class EventCalendar {
             }
             /*
                 NOTE: idk if this accounts for every case where the number of
-                events that are equal to theindex
+                events that are equal to the index
             */
             if(index == numEvents-1){
                 events[index] = null;
@@ -149,10 +151,112 @@ public class EventCalendar {
 //    public void printByDate() {
 //
 //    } //ordered by date and timeslot
-//    public void printByCampus() {
-//
-//    } //ordered by campus and building/room
+    public void printByCampus() {
+        if(events[0] != null) {
+            Event[] nameSorted = new Event[numEvents];
+
+            // copy array first
+            for (int i = 0; i < numEvents; i++) {
+                if (events[i] != null) {
+                    nameSorted[i] = events[i];
+                }
+            }
+
+            // sort
+            boolean swap;
+
+            do{
+                swap = false;
+                for (int i = 0; i < numEvents - 1; i++) {
+                    if(nameSorted[i+1] != null){
+                        if (nameSorted[i].getLocation().buildingName.compareToIgnoreCase(nameSorted[i+1].getLocation().buildingName) > 0) {
+                            Event temp = nameSorted[i];
+                            nameSorted[i] = nameSorted[i + 1];
+                            nameSorted[i + 1] = temp;
+                            swap = true;
+                        }
+                    }
+                }
+            } while (swap);
+
+            do{
+                swap = false;
+                for (int i = 0; i < numEvents - 1; i++) {
+                    if(nameSorted[i+1] != null){
+                        if (nameSorted[i].getLocation().campus.compareToIgnoreCase(nameSorted[i+1].getLocation().campus) > 0) {
+                            Event temp = nameSorted[i];
+                            nameSorted[i] = nameSorted[i + 1];
+                            nameSorted[i + 1] = temp;
+                            swap = true;
+                        }
+                    }
+                }
+            } while (swap);
+
+
+
+            for(Event i : nameSorted){
+                if(i != null){
+                    System.out.println(i.toString());
+                }
+            }
+        }
+        else{
+            System.out.println("Event Calendar Empty!");
+        }
+
+
+    } //ordered by campus and building/room
 //    public void printByDepartment(){
 //
 //    } //ordered by department
+
+public static void main(String[] args) {
+    EventCalendar cal = new EventCalendar();
+
+    Event a = new Event(new Date(2023, 9, 29),
+            Timeslot.AFTERNOON,
+            Location.HLL114,
+            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+    Event b = new Event(new Date(2023, 9, 29),
+            Timeslot.AFTERNOON,
+            Location.TIL232,
+            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+    Event c = new Event(new Date(2023, 9, 29),
+            Timeslot.EVENING,
+            Location.ARC103,
+            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+    Event d = new Event(new Date(2023, 9, 29),
+            Timeslot.MORNING,
+            Location.AB2225,
+            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+    Event e = new Event(new Date(2023, 9, 29),
+            Timeslot.MORNING,
+            Location.MU302,
+            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+    Event f = new Event(new Date(2023, 9, 29),
+            Timeslot.MORNING,
+            Location.BE_AUD,
+            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+    //test add
+    cal.add(a);
+    cal.add(b);
+    cal.add(c);
+    cal.add(d);
+    cal.add(e);
+    cal.add(f);
+
+    // test print
+    cal.print();
+    System.out.println("sorted by campus and building");
+    cal.printByCampus();
+
+    }
+
 }
+

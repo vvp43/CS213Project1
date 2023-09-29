@@ -31,6 +31,18 @@ public class Event implements Comparable<Event>{
     }
 
     /**
+     * Constructor with date, startTime, and location as Param
+     * @param date
+     * @param startTime
+     * @param location
+     */
+    public Event(Date date, Timeslot startTime, Location location){
+        this.date = date;
+        this.startTime = startTime;
+        this.location = location;
+    }
+
+    /**
      * Date getter method
      */
     public Date getDate (){
@@ -92,7 +104,7 @@ public class Event implements Comparable<Event>{
     @Override
     public String toString(){
         String str1, str2, str3, str4, str5, str6;
-        str1=date.event.get(Calendar.MONTH)+"/"+date.event.get(Calendar.DAY_OF_MONTH)+"/"+date.event.get(Calendar.YEAR);
+        str1=date.getMonth()+"/"+date.getDay()+"/"+date.getYear();
         if(startTime.minute<10) {// startTime minute <10 add a 0 infront
             str2 = startTime.hour + ":" + 0 + startTime.minute;
         } else {str2 = startTime.hour + ":" + startTime.minute;}

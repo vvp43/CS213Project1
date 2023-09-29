@@ -28,6 +28,27 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
     }
 
     /**
+     * getYear() method
+     */
+    public int getYear(){
+        return this.year;
+    }
+
+    /**
+     * getMonth() method
+     */
+    public int getMonth(){
+        return this.month;
+    }
+
+    /**
+     * getDay() method
+     */
+    public int getDay(){
+        return this.day;
+    }
+
+    /**
      * add() method
      *
      * @param minutes

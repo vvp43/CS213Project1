@@ -249,6 +249,11 @@ public class EventOrganizer {
      * operationPE() method
      */
     private void operationPE(EventCalendar ec){
+        if(ec.getEvent()==null){
+            System.out.println("Event calendar is empty!");
+            return;
+        }
+
         System.out.println("* Event calendar by event date and start time *");
         ec.printByDate();
     }
@@ -257,6 +262,11 @@ public class EventOrganizer {
      * operationPC() method
      */
     private void operationPC(EventCalendar ec){
+        if(ec.getEvent()==null){
+            System.out.println("Event calendar is empty!");
+            return;
+        }
+
         System.out.println("* Event calendar by campus and building *");
         ec.printByCampus();
     }
@@ -265,6 +275,11 @@ public class EventOrganizer {
      * operationPD() method
      */
     private void operationPD(EventCalendar ec){
+        if(ec.getEvent()==null){
+            System.out.println("Event calendar is empty!");
+            return;
+        }
+
         System.out.println("* Event calendar by department *");
         ec.printByDepartment();
     }

@@ -39,6 +39,9 @@ public class Event implements Comparable<Event>{
         return contact;
     }
 
+    public Timeslot getTimeslot(){
+        return startTime;
+    }
 
     /**
      * This method is used to calculate endTime
@@ -113,11 +116,11 @@ public class Event implements Comparable<Event>{
             }
         }
         else if(this.date.compareTo(a.date) < 0){
-            System.out.println("NUH UH");
+            //System.out.println("NUH UH");
             return -1;
         }
         else{
-            System.out.println("YUH UH");
+            //System.out.println("YUH UH");
             return 1;
         }
     }

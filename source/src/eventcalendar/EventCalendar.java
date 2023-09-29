@@ -188,6 +188,7 @@ public class EventCalendar {
                 }
             } while (swap);
 
+
             for(Event i : dateSorted){
                 if(i != null){
                     System.out.println(i.toString());

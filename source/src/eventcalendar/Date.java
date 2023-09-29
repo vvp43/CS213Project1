@@ -15,11 +15,12 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * Constructor with param year, month and day
+     *
      * @param year
      * @param month
      * @param day
      */
-    public Date(int year, int month, int day){
+    public Date(int year, int month, int day) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -28,10 +29,11 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * add() method
+     *
      * @param minutes
      * @return
      */
-    public String add (int minutes){
+    public String add(int minutes) {
         Calendar temp = Calendar.getInstance();
         temp = event;
         temp.add(Calendar.MINUTE, minutes);
@@ -39,33 +41,31 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int hour = temp.get(Calendar.HOUR);
         int min = temp.get(Calendar.MINUTE);
 
-        String ampm= (temp.get(Calendar.AM_PM) == Calendar.AM) ? "am" : "pm";
+        String ampm = (temp.get(Calendar.AM_PM) == Calendar.AM) ? "am" : "pm";
         hour = (hour == 0) ? 12 : hour;
 
-        return hour+":"+minutes+ampm;
+        return hour + ":" + minutes + ampm;
     }
 
     /**
      * compareTo() method
+     *
      * @param input the object to be compared.
      * @return
      */
     @Override
-    public int compareTo(Date input){
-        int i = input.year*10000 + input.month*100 + input.day;
-        int e = event.get(Calendar.YEAR)*10000
-                + event.get(Calendar.MONTH)*100
-                + event.get(Calendar.DAY_OF_MONTH);
-        int diff = i-e;
-        //Same day: diff=0 return 0
-        if(diff==0){
-            return 0;
-        //Input before event day return -1
-        }else if(diff<0) {
+    public int compareTo(Date input) {
+        if (event.compareTo(input.event) < 0){
             return -1;
-        //Input after event day return 1
-        }else return 1;
+        }
+        else if(event.compareTo(input.event) > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
+
 
 
     /**
@@ -126,12 +126,11 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int d = event.get(Calendar.DAY_OF_MONTH);
         //1st step: checks if event date is valid
         if(isValidDay(y, m, d) && isValidMonth(m)){
-        //2nd step: checks if event date is in the next 6 months
+        //2n step: checks if event date is in the past
             Calendar temp = Calendar.getInstance();
             temp.add(Calendar.MONTH, 6); // add 6 months to current date for next part
             if(event.after(temp)){ // check to see if event date is within 6 months of the current date
-                //3rd step: checks if event date is replicate with previous date
-                EventCalendar database = new EventCalendar();
+                return false;
             }
             else {
                 return true;
@@ -148,6 +147,8 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         Date a = new Date(2023, 9, 31);
         Date b = new Date(2023, 9, 29);
         Date c = new Date(2024, 2, 29);
+
+        Date d = new Date(2024, 2, 29);
         System.out.println(a.isLeapYear(a.year));
         Calendar date = Calendar.getInstance();
 //        date.set(2023, 9, 31);
@@ -159,6 +160,12 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         System.out.println(a.isValidDay(a.year, a.month, a.day));
         System.out.println(b.isValidDay(b.year, b.month, b.day));
         System.out.println(c.isValidDay(c.year, c.month, c.day));
+
+        System.out.println(a.compareTo(b));
+        System.out.println(b.compareTo(a));
+        System.out.println(a.compareTo(a));
+
+        System.out.println(c.compareTo(d));
 
 
 

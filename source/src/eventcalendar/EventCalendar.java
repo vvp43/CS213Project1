@@ -57,6 +57,22 @@ public class EventCalendar {
 
     } //increase the capacity by 4
 
+    private boolean isEmpty(){
+        boolean check = true;
+
+        if(events == null){
+            check = true;
+        }
+        else{
+            for(Event i : events){
+                if(i != null){
+                    check = false;
+                }
+            }
+        }
+        return check;
+    }
+
 
     /**
         add() method
@@ -172,7 +188,7 @@ public class EventCalendar {
      * printByDate() method
      */
     public void printByDate() {
-        if(events[0] != null) {
+        if(!isEmpty()) {
             Event[] dateSorted = new Event[numEvents];
 
             // copy array first
@@ -204,14 +220,16 @@ public class EventCalendar {
                 }
             }
         }
-
+        else{
+            System.out.println("Event Calendar Empty!");
+        }
     }
 
     /**
      * printByCampus() method
      */
     public void printByCampus() {
-        if(events[0] != null) {
+        if(!isEmpty()) {
             Event[] nameSorted = new Event[numEvents];
 
             // copy array first
@@ -267,7 +285,7 @@ public class EventCalendar {
      * printByDepartment() method
      */
     public void printByDepartment() {
-        if (events[0] != null) {
+        if (!isEmpty()) {
             Event[] deptSorted = new Event[numEvents];
 
             // copy array first
@@ -299,6 +317,9 @@ public class EventCalendar {
                     System.out.println(i.toString());
                 }
             }
+        }
+        else{
+            System.out.println("Event Calendar Empty!");
         }
     }
 

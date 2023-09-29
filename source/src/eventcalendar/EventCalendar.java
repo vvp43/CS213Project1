@@ -10,6 +10,20 @@ public class EventCalendar {
     private Event [] events; //the array holding the list of events
     private int numEvents; //current number of events in the array
     public static final int NOT_FOUND = -1;
+
+
+    /**
+     * events getter
+     */
+    public Event[] getEvent (){
+        return this.events;
+    }
+
+    /**
+     * find() method
+     * @param event
+     * @return
+     */
     private int find(Event event) {
         for(Event i : events){
             if(i != null){
@@ -147,6 +161,19 @@ public class EventCalendar {
 
     } //print the array as is
 //    public void printByDate() {
+//        if(events[0] != null){
+//            int newNumofEvents = numEvents;
+//            Event[] newEvents = new Event[newNumofEvents];
+//            Event greatest = events[0];
+//
+//            for(Event i : events){
+//                if(i.compareTo())
+//
+//
+//        }
+//
+//
+//        }
 //
 //    } //ordered by date and timeslot
 //    public void printByCampus() {
@@ -155,4 +182,5 @@ public class EventCalendar {
 //    public void printByDepartment(){
 //
 //    } //ordered by department
+
 }

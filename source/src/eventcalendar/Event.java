@@ -1,5 +1,6 @@
 package eventcalendar;
 
+import java.sql.SQLOutput;
 import java.util.Calendar;
 
 /**
@@ -29,20 +30,11 @@ public class Event implements Comparable<Event>{
         this.duration = duration;
     }
 
-    /**
-     * TEST CONSTRUCTOR
-     * Constructor with startTime as param
-     * @param startTime
-     */
-    public Event(Timeslot startTime){
-        this.startTime = startTime;
-    }
 
     /**
      * This method is used to calculate endTime
      * @param  int duration in min
      * @return an array of endTime where endTime[0] is hour and endTime[1] is minute
-    
      */
     public int[] endTime(int startHour, int startMin, int dur){
         //store start hour and start minute in 2 elements array
@@ -58,8 +50,6 @@ public class Event implements Comparable<Event>{
         //return
         return time;
     }
-
-
 
     /**
      * toString() method
@@ -101,18 +91,13 @@ public class Event implements Comparable<Event>{
      *Not sure what to return if this compareTo fails yet so i put in -1s for a temporary solution
      */
     @Override
-    public int compareTo (Event a){
-        if (this.date.compareTo(a.date)==0){
+    public int compareTo (Event a) {
+        if(this.date.compareTo(a.date)==0){
             if(this.startTime.compareTo(a.startTime)==0){
-                return 0; // conflicting scheduling
-            }
-            else{
-                return -1;
+                return 0;//conflicting scheduling
             }
         }
-        else{
-            return -1;
-        }
+        return -1;
     }
 
     /**
@@ -140,16 +125,34 @@ public class Event implements Comparable<Event>{
      * @param args
      */
     public static void main(String[] args) {
-//        Event e  = new Event(Timeslot.MORNING);
-//        int h = e.startTime.hour;
-//        int m = e.startTime.minute;
-//        int[] endTime = e.endTime(h,m,240);
-//        System.out.println("Start at "+ h +":"+m);
-//        System.out.println("End at " + endTime[0] +":"+ endTime[1]);
         Event a = new Event(new Date(2023, 9, 29),
-                                Timeslot.AFTERNOON,
-                                Location.HILL114,
-                                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+                Timeslot.AFTERNOON,
+                Location.HLL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+        Event b = new Event(new Date(2023, 9, 29),
+                Timeslot.AFTERNOON,
+                Location.HLL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+        Event c = new Event(new Date(2023, 9, 29),
+                Timeslot.EVENING,
+                Location.HLL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
+
+        Event d = new Event(new Date(2023, 9, 29),
+                Timeslot.MORNING,
+                Location.HLL114,
+                new Contact(Department.CS, "cs@rutgers.edu"), 90);
         System.out.println(a.toString());
+
+        System.out.println(a.compareTo(d)); // should be 1
+
+        System.out.println(a.compareTo(c));
+
+        System.out.println(a.compareTo(b));
+
+
+
     }
 }

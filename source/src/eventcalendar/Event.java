@@ -30,6 +30,12 @@ public class Event implements Comparable<Event>{
         this.duration = duration;
     }
 
+    /**
+     * Date getter method
+     */
+    public Date getDate (){
+        return this.date;
+    }
 
     /**
      * This method is used to calculate endTime

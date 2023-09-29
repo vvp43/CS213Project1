@@ -59,11 +59,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int e = event.get(Calendar.YEAR) * 10000 + event.get(Calendar.MONTH) * 100 + event.get(Calendar.DAY_OF_MONTH);
         int diff = i-e;
 
-        if (diff== 0){
-            return 0;
-        }else if(diff<0){
-            return -1;
-        }else return 1;
+        return Integer.compare(diff, 0);
     }
 
 
@@ -121,9 +117,10 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      *still need to test for a valid calendar date and return an error, like 13/32/2005
      */
     public boolean isValid() {
-        int y = event.get(Calendar.YEAR);
-        int m = event.get(Calendar.MONTH);
-        int d = event.get(Calendar.DAY_OF_MONTH);
+        int y = this.year;
+        int m = this.month;
+        int d = this.day;
+        Date thisEvent = new Date(y,m,d);
         //1st step: checks if event date is valid
         if(isValidDay(y, m, d) && isValidMonth(m)){
         //2n step: checks if event date is in the past
@@ -133,10 +130,17 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
                 return false;
             }
             else {
+                EventCalendar eventCalendar = new EventCalendar();
+                Event[] listOfEvents = eventCalendar.getEvent();
+                for (Event listOfEvent : listOfEvents) {
+                    if (listOfEvent.getDate().compareTo(thisEvent) == 0) {
+                        return false;
+                    }
+                }
                 return true;
             }
         }
-        return false;
+        return true;
     }
 
     /**

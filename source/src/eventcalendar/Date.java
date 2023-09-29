@@ -55,15 +55,15 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      */
     @Override
     public int compareTo(Date input) {
-        if (event.compareTo(input.event) < 0){
-            return -1;
-        }
-        else if(event.compareTo(input.event) > 0){
-            return 1;
-        }
-        else{
+        int i = input.year * 10000 + input.month *100 + input.day;
+        int e = event.get(Calendar.YEAR) * 10000 + event.get(Calendar.MONTH) * 100 + event.get(Calendar.DAY_OF_MONTH);
+        int diff = i-e;
+
+        if (diff== 0){
             return 0;
-        }
+        }else if(diff<0){
+            return -1;
+        }else return 1;
     }
 
 

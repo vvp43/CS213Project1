@@ -123,22 +123,22 @@ public class Event implements Comparable<Event>{
     public static void main(String[] args) {
         Event a = new Event(new Date(2023, 9, 29),
                 Timeslot.AFTERNOON,
-                Location.HILL114,
+                Location.HLL114,
                 new Contact(Department.CS, "cs@rutgers.edu"), 90);
 
         Event b = new Event(new Date(2023, 9, 29),
                 Timeslot.AFTERNOON,
-                Location.HILL114,
+                Location.HLL114,
                 new Contact(Department.CS, "cs@rutgers.edu"), 90);
 
         Event c = new Event(new Date(2023, 9, 29),
                 Timeslot.EVENING,
-                Location.HILL114,
+                Location.HLL114,
                 new Contact(Department.CS, "cs@rutgers.edu"), 90);
 
         Event d = new Event(new Date(2023, 9, 29),
                 Timeslot.MORNING,
-                Location.HILL114,
+                Location.HLL114,
                 new Contact(Department.CS, "cs@rutgers.edu"), 90);
         System.out.println(a.toString());
 

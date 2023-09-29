@@ -162,22 +162,40 @@ public class EventCalendar {
         }
 
     } //print the array as is
-//    public void printByDate() {
-//        if(events[0] != null){
-//            int newNumofEvents = numEvents;
-//            Event[] newEvents = new Event[newNumofEvents];
-//            Event greatest = events[0];
-//
-//            for(Event i : events){
-//                if(i.compareTo())
-//
-//
-//        }
-//
-//
-//        }
-//
-//    } //ordered by date and timeslot
+    public void printByDate() {
+        if(events[0] != null) {
+            Event[] dateSorted = new Event[numEvents];
+
+            // copy array first
+            for (int i = 0; i < numEvents; i++) {
+                if (events[i] != null) {
+                    dateSorted[i] = events[i];
+                }
+            }
+
+            boolean swap;
+            do {
+                swap = false;
+                for (int i = 0; i < numEvents - 1; i++) {
+                    if (dateSorted[i + 1] != null) {
+                        if (dateSorted[i].compareTo(dateSorted[i + 1]) < 0) {
+                            Event temp = dateSorted[i];
+                            dateSorted[i] = dateSorted[i + 1];
+                            dateSorted[i + 1] = temp;
+                            swap = true;
+                        }
+                    }
+                }
+            } while (swap);
+
+            for(Event i : dateSorted){
+                if(i != null){
+                    System.out.println(i.toString());
+                }
+            }
+        }
+
+    } //ordered by date and timeslot
     public void printByCampus() {
         if(events[0] != null) {
             Event[] nameSorted = new Event[numEvents];
@@ -276,8 +294,8 @@ public class EventCalendar {
 public static void main(String[] args) {
     EventCalendar cal = new EventCalendar();
 
-    Event a = new Event(new Date(2023, 9, 29),
-            Timeslot.AFTERNOON,
+    Event a = new Event(new Date(2023, 9, 30),
+            Timeslot.MORNING,
             Location.HLL114,
             new Contact(Department.CS, "cs@rutgers.edu"), 90);
 
@@ -296,13 +314,13 @@ public static void main(String[] args) {
             Location.AB2225,
             new Contact(Department.MATH, "math@rutgers.edu"), 90);
 
-    Event e = new Event(new Date(2023, 9, 29),
-            Timeslot.MORNING,
+    Event e = new Event(new Date(2023, 9, 30),
+            Timeslot.AFTERNOON,
             Location.MU302,
             new Contact(Department.EE, "eE@rutgers.edu"), 90);
 
     Event f = new Event(new Date(2023, 9, 29),
-            Timeslot.MORNING,
+            Timeslot.EVENING,
             Location.BE_AUD,
             new Contact(Department.EE, "EE@rutgers.edu"), 90);
     //test add
@@ -320,6 +338,9 @@ public static void main(String[] args) {
 
     System.out.println("sorted by department");
     cal.printByDepartment();
+
+    System.out.println("sorted by date and time");
+    cal.printByDate();
 
     }
 

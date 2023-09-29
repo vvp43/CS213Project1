@@ -30,9 +30,11 @@ public class Event implements Comparable<Event>{
         this.duration = duration;
     }
 
+
     public Location getLocation(){
         return location;
     }
+
 
     /**
      * This method is used to calculate endTime
@@ -97,6 +99,14 @@ public class Event implements Comparable<Event>{
     public int compareTo (Event a) {
         System.out.println("are dates equal?: "+date.compareTo(a.date));
         return -40;
+
+        if(this.date.compareTo(a.date)==0){
+            if(this.startTime.compareTo(a.startTime)==0){
+                return 0;//conflicting scheduling
+            }
+        }
+        return -1;
+
     }
 
     /**

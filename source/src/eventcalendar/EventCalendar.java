@@ -234,10 +234,44 @@ public class EventCalendar {
 
 
     } //ordered by campus and building/room
-//    public void printByDepartment(){
-//
-//    } //ordered by department
+    public void printByDepartment() {
+        if (events[0] != null) {
+            Event[] deptSorted = new Event[numEvents];
 
+            // copy array first
+            for (int i = 0; i < numEvents; i++) {
+                if (events[i] != null) {
+                    deptSorted[i] = events[i];
+                }
+            }
+
+            // sort
+            boolean swap;
+
+            do {
+                swap = false;
+                for (int i = 0; i < numEvents - 1; i++) {
+                    if (deptSorted[i + 1] != null) {
+                        if (deptSorted[i].getContact().getDepartment().toString().compareToIgnoreCase(deptSorted[i + 1].getContact().getDepartment().toString()) > 0) {
+                            Event temp = deptSorted[i];
+                            deptSorted[i] = deptSorted[i + 1];
+                            deptSorted[i + 1] = temp;
+                            swap = true;
+                        }
+                    }
+                }
+            } while (swap);
+
+            for(Event i : deptSorted){
+                if(i != null){
+                    System.out.println(i.toString());
+                }
+            }
+
+        } //ordered by department
+
+
+    }
 
 public static void main(String[] args) {
     EventCalendar cal = new EventCalendar();
@@ -250,27 +284,27 @@ public static void main(String[] args) {
     Event b = new Event(new Date(2023, 9, 29),
             Timeslot.AFTERNOON,
             Location.TIL232,
-            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+            new Contact(Department.BAIT, "BAIT@rutgers.edu"), 90);
 
     Event c = new Event(new Date(2023, 9, 29),
             Timeslot.EVENING,
             Location.ARC103,
-            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+            new Contact(Department.ITI, "iti@rutgers.edu"), 90);
 
     Event d = new Event(new Date(2023, 9, 29),
             Timeslot.MORNING,
             Location.AB2225,
-            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+            new Contact(Department.MATH, "math@rutgers.edu"), 90);
 
     Event e = new Event(new Date(2023, 9, 29),
             Timeslot.MORNING,
             Location.MU302,
-            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+            new Contact(Department.EE, "eE@rutgers.edu"), 90);
 
     Event f = new Event(new Date(2023, 9, 29),
             Timeslot.MORNING,
             Location.BE_AUD,
-            new Contact(Department.CS, "cs@rutgers.edu"), 90);
+            new Contact(Department.EE, "EE@rutgers.edu"), 90);
     //test add
     cal.add(a);
     cal.add(b);
@@ -283,6 +317,9 @@ public static void main(String[] args) {
     cal.print();
     System.out.println("sorted by campus and building");
     cal.printByCampus();
+
+    System.out.println("sorted by department");
+    cal.printByDepartment();
 
     }
 

@@ -56,7 +56,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
     @Override
     public int compareTo(Date input) {
         int i = input.year * 10000 + input.month *100 + input.day;
-        int e = event.get(Calendar.YEAR) * 10000 + event.get(Calendar.MONTH) * 100 + event.get(Calendar.DAY_OF_MONTH);
+        int e = this.year * 10000 + this.month * 100 + this.day;
         int diff = i-e;
 
         return Integer.compare(diff, 0);
@@ -123,24 +123,27 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         Date thisEvent = new Date(y,m,d);
         //1st step: checks if event date is valid
         if(isValidDay(y, m, d) && isValidMonth(m)){
-        //2n step: checks if event date is in the past
+        //2nd step: checks if event date is in the past
             Calendar temp = Calendar.getInstance();
             temp.add(Calendar.MONTH, 6); // add 6 months to current date for next part
             if(event.after(temp)){ // check to see if event date is within 6 months of the current date
                 return false;
             }
+            //3rd step: checks if  event date is replicated
             else {
                 EventCalendar eventCalendar = new EventCalendar();
                 Event[] listOfEvents = eventCalendar.getEvent();
-                for (Event listOfEvent : listOfEvents) {
-                    if (listOfEvent.getDate().compareTo(thisEvent) == 0) {
-                        return false;
+                if(listOfEvents!= null){
+                    for (Event listOfEvent : listOfEvents) {
+                        if (listOfEvent.getDate().compareTo(thisEvent) == 0) {
+                            return false;
+                        }
                     }
                 }
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -170,6 +173,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         System.out.println(a.compareTo(a));
 
         System.out.println(c.compareTo(d));
+        System.out.println(b.isValid());
 
 
 

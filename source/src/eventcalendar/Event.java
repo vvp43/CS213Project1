@@ -38,6 +38,34 @@ public class Event implements Comparable<Event>{
     }
 
     /**
+     * Location getter method
+     */
+    public Location getLocation(){
+        return this.location;
+    }
+
+    /**
+     * Contact getter method
+     */
+    public Contact getContact(){
+        return this.contact;
+    }
+
+    /**
+     * startTime getter method
+     */
+    public Timeslot getStartTime(){
+        return this.startTime;
+    }
+
+    /**
+     * Duration getter method
+     */
+    public int getDuration(){
+        return this.duration;
+    }
+
+    /**
      * This method is used to calculate endTime
      * @param  int duration in min
      * @return an array of endTime where endTime[0] is hour and endTime[1] is minute
@@ -110,20 +138,19 @@ public class Event implements Comparable<Event>{
      * equals() method
      */
     @Override
-    public boolean equals(Object o){
-        if(o.equals(this)){
-            return true;
+    public boolean equals(Object event){
+        Event realEvent = (Event) event;
+        if (this.date.compareTo(realEvent.date) == 0) {
+            if(this.startTime.compareTo(realEvent.startTime) == 0){
+                return this.location.compareTo(realEvent.location) == 0;
+            }
+            else{
+                return false;
+            }
         }
-
-      if(!(o instanceof Event)){
-          return false;
-      }
-
-      Event c = (Event) o;
-
-      return this.date.compareTo(c.date) == 0 && this.startTime.compareTo(c.startTime)==0
-              && this.location.compareTo(c.location) == 0;
-
+        else{
+            return false;
+        }
     }
 
     /**

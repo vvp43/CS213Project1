@@ -35,6 +35,7 @@ public class Contact {
         return email;
     }
 
+
     /**
      * isValid() method
      *idk if were suppose to check for case sensitivity for department here because contact literally

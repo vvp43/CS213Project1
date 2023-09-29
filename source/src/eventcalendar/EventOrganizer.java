@@ -248,22 +248,25 @@ public class EventOrganizer {
     /**
      * operationPE() method
      */
-    private void operationPE(){
-
+    private void operationPE(EventCalendar ec){
+        System.out.println("* Event calendar by event date and start time *");
+        ec.printByDate();
     }
 
     /**
      * operationPC() method
      */
-    private void operationPC(){
-
+    private void operationPC(EventCalendar ec){
+        System.out.println("* Event calendar by campus and building *");
+        ec.printByCampus();
     }
 
     /**
      * operationPD() method
      */
-    private void operationPD(){
-
+    private void operationPD(EventCalendar ec){
+        System.out.println("* Event calendar by department *");
+        ec.printByDepartment();
     }
 
     /**
@@ -308,13 +311,13 @@ public class EventOrganizer {
                         operationP(eventCalendar);
                         break;
                     case "PC":
-                        operationPC();
+                        operationPC(eventCalendar);
                         break;
                     case "PD":
-                        operationPD();
+                        operationPD(eventCalendar);
                         break;
                     case "PE":
-                        operationPE();
+                        operationPE(eventCalendar);
                         break;
                 }
             }

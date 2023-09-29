@@ -142,8 +142,21 @@ public class Event implements Comparable<Event>{
             if(this.startTime.compareTo(a.startTime)==0){
                 return 0;//conflicting scheduling
             }
+            else if (this.startTime.compareTo(a.startTime)<0){
+                return -1;
+            }
+            else{
+                return 1;
+            }
         }
-        return -1;
+        else if(this.date.compareTo(a.date) < 0){
+            //System.out.println("NUH UH");
+            return -1;
+        }
+        else{
+            //System.out.println("YUH UH");
+            return 1;
+        }
     }
 
     /**

@@ -26,7 +26,7 @@ public enum Timeslot {
     public static void main(String[] args) {
         System.out.println(Timeslot.MORNING.compareTo(Timeslot.AFTERNOON));
         System.out.println(Timeslot.MORNING.compareTo(Timeslot.EVENING));
-
+        Timeslot.MORNING.compareTo(Timeslot.EVENING);
         System.out.println(Timeslot.EVENING.compareTo(Timeslot.AFTERNOON));
     }
 }

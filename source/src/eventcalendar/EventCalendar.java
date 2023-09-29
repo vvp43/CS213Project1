@@ -11,6 +11,14 @@ public class EventCalendar {
     private int numEvents; //current number of events in the array
     public static final int NOT_FOUND = -1;
 
+
+    /**
+     * events getter
+     */
+    public Event[] getEvent (){
+        return this.events;
+    }
+
     /**
      * find() method
      * @param event

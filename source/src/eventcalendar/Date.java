@@ -39,7 +39,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int hour = temp.get(Calendar.HOUR);
         int min = temp.get(Calendar.MINUTE);
 
-        String ampm = (temp.get(Calendar.AM_PM) == Calendar.AM) ? "am" : "pm";
+        String ampm= (temp.get(Calendar.AM_PM) == Calendar.AM) ? "am" : "pm";
         hour = (hour == 0) ? 12 : hour;
 
         return hour+":"+minutes+ampm;
@@ -52,10 +52,19 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      */
     @Override
     public int compareTo(Date input){
-        if(event.compareTo(input.event) == 0) {
+        int i = input.year*10000 + input.month*100 + input.day;
+        int e = event.get(Calendar.YEAR)*10000
+                + event.get(Calendar.MONTH)*100
+                + event.get(Calendar.DAY_OF_MONTH);
+        int diff = i-e;
+        //Same day: diff=0 return 0
+        if(diff==0){
             return 0;
-        }
-        return -1;
+        //Input before event day return -1
+        }else if(diff<0) {
+            return -1;
+        //Input after event day return 1
+        }else return 1;
     }
 
 
@@ -117,11 +126,12 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int d = event.get(Calendar.DAY_OF_MONTH);
         //1st step: checks if event date is valid
         if(isValidDay(y, m, d) && isValidMonth(m)){
-        //2n step: checks if event date is in the past
+        //2nd step: checks if event date is in the next 6 months
             Calendar temp = Calendar.getInstance();
             temp.add(Calendar.MONTH, 6); // add 6 months to current date for next part
             if(event.after(temp)){ // check to see if event date is within 6 months of the current date
-                return false;
+                //3rd step: checks if event date is replicate with previous date
+                EventCalendar database = new EventCalendar();
             }
             else {
                 return true;

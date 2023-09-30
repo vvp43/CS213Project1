@@ -80,11 +80,11 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int currentDateInt = this.year * 10000 + this.month * 100 + this.day;
         int diff = currentDateInt - inputDateInt;
 
-        if(diff>0) {
+        if (diff > 0) {
             return 1;
         }
 
-        if(diff== 0){
+        if (diff == 0) {
             return 0;
         }
 
@@ -146,36 +146,27 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int currentMonth = inputDate.curr.get(Calendar.MONTH) + 1;
         int currentDay = inputDate.curr.get(Calendar.DAY_OF_MONTH);
         Date currentDate = new Date(currentYear, currentMonth, currentDay);
-        return inputDate.compareTo(currentDate) > 0;
+        if(inputDate.isValidDate(inputDate)) {
+            return inputDate.compareTo(currentDate) > 0;
+        }
+        return false;
     }
 
     /**
      * isWithinSixMonths() method
      */
     private boolean isWithinSixMonths(Date inputDate) {
-        if (isFutureDate(inputDate)) {
-            Calendar temp = Calendar.getInstance();
-            temp.add(Calendar.MONTH, 7);
-            return !inputDate.event.after(temp);
+        if(inputDate.isValidDate(inputDate)){
+            if (isFutureDate(inputDate)) {
+                Calendar temp = Calendar.getInstance();
+                temp.add(Calendar.MONTH, 7);
+                return !inputDate.event.after(temp);
+            }
         }
+
         return false;
     }
 
-    /**
-     * isDuplicated() method
-     */
-    private boolean isDuplicated(Date inputDate) {
-        EventCalendar eventCalendar = new EventCalendar();
-        Event[] listOfEvents = eventCalendar.getEvent();
-        if (listOfEvents != null) {
-            for (Event listOfEvent : listOfEvents) {
-                if (listOfEvent.getDate().compareTo(inputDate) == 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     /**
      * isValid() method
@@ -188,27 +179,23 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         int d = this.day;
         Date thisEvent = new Date(y, m, d);
         //1st step: checks if event date is valid
-        if(isValidDate(thisEvent)){
+        if (isValidDate(thisEvent)) {
             //2nd step: checks if event date is in the future
-            if(isFutureDate(thisEvent)){
+            if (isFutureDate(thisEvent)) {
                 //3rd step: check if event date is within 6 months
-                if (isWithinSixMonths(thisEvent)){
+                if (isWithinSixMonths(thisEvent)) {
                     //4th step: check if event date is duplicated
-                    if(!isDuplicated(thisEvent)){
-                        return true;
-                    }else{
-                        System.out.println("The event is already on the calendar.");
-                    }
-                }else {
-                    System.out.println(m+"/"+d+"/"+y+": Event date must be within 6 months!");
+                    return true;
+                } else {
+                    System.out.println(m + "/" + d + "/" + y + ": Event date must be within 6 months!");
                     return false;
                 }
             } else {
-                System.out.println(m+"/"+d+"/"+y+": Event date must be a future date!");
+                System.out.println(m + "/" + d + "/" + y + ": Event date must be a future date!");
                 return false;
             }
         }
-        System.out.println(m+"/"+d+"/"+y+": Invalid calendar date!");
+        System.out.println(m + "/" + d + "/" + y + ": Invalid calendar date!");
         return false;
     }
 
@@ -218,6 +205,49 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println("Vinh");
+        /*
+        Demonstrate test case for isValid()
+        isValid() is designed based on three conditions
+        1. The date is valid (has to be proper date and month depending on leap or non leap year)
+        2. The date is in the future
+        3. The date is within 6 months;
+         */
+
+        //Example Dates (Today's date: 9/30/2023)
+        Date a = new Date(2024, 2, 29);
+        Date b = new Date(2023, 2, 29);
+        Date c = new Date(2022, 2, 29);
+        Date d = new Date(2025, 3, 31);
+
+        //1. The date is valid (has to be proper date and month depending on leap or non leap year)
+        System.out.println("* Test Case 1 *");
+        System.out.println(a.isValidDate(a));
+        System.out.println(b.isValidDate(b));
+        System.out.println(c.isValidDate(c));
+        System.out.println(d.isValidDate(d));
+        System.out.println();
+
+        //2. The date is in the future
+        System.out.println("* Test Case 2 *");
+        System.out.println(a.isFutureDate(a));
+        System.out.println(b.isFutureDate(b));
+        System.out.println(c.isFutureDate(c));
+        System.out.println(d.isFutureDate(d));
+        System.out.println();
+
+        //3. The date is within 6 months
+        System.out.println("* Test Case 3 *");
+        System.out.println(a.isWithinSixMonths(a));
+        System.out.println(b.isWithinSixMonths(b));
+        System.out.println(c.isWithinSixMonths(c));
+        System.out.println(d.isWithinSixMonths(d));
+        System.out.println();
+
+        //isValid() complete method
+        System.out.println("Complete method");
+        System.out.println(a.isValid());
+        System.out.println(b.isValid());
+        System.out.println(c.isValid());
+        System.out.println(d.isValid());
     }
 }

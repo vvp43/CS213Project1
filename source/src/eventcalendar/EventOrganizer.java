@@ -116,6 +116,7 @@ public class EventOrganizer {
      * operationA() method
      */
     private void operationA(Event e, EventCalendar ec){
+
         /*
         Check if any elements of event is invalid and display error message
          */
@@ -147,6 +148,19 @@ public class EventOrganizer {
             System.out.println("Event duration must be at least " +
                     "30 minutes and at most 120 minutes");
             return;
+        }
+
+        /*
+        Check if the event is duplicated or not
+         */
+        Event[] eventList = ec.getEvent();
+        if(eventList!=null) {
+            for (Event i : eventList) {
+                if (i.equals(e)) {
+                    System.out.println("The event is already on the calendar.");
+                    return;
+                } else break;
+            }
         }
 
         //Add to event calendar array

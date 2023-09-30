@@ -236,9 +236,12 @@ public class EventOrganizer {
         }
 
         Event e = new Event(dateObj, startTime, room);
-        ec.remove(e);
-        System.out.println("Event has been removed from the calendar!");
-
+        if (ec.contains(e)) {
+            ec.remove(e);
+            System.out.println("Event has been removed from the calendar!");
+        }else {
+            System.out.println("Cannot remove; event is not in the calendar! ");
+        }
     }
 
     /**
@@ -323,24 +326,5 @@ public class EventOrganizer {
             }
         }
 
-
-
-
     }
-
-    public static void main(String[] args) {
-//        Scanner scanObj = new Scanner(System.in);
-//        String command =scanObj.next();
-//        int month = scanObj.nextInt();
-//        int day = scanObj.nextInt();
-//        int year = scanObj.nextInt();
-//        System.out.println(command + " " + day+"/"+month+"/"+year);
-//        String str = "10/21/2023";
-//        String[] a = str.split("/");
-//        for (String i: a){
-//            System.out.print(i+" ");
-//        }
-        new EventOrganizer().run();
-    }
-
 }

@@ -176,10 +176,17 @@ public class EventCalendar {
      * print() method
      */
     public void print() {
-        for(Event i : events){
-            if(i != null){
-                System.out.println(i.toString());
+        if(!isEmpty()){
+            System.out.println("* Event calendar *");
+            for(Event i : events){
+                if(i != null){
+                    System.out.println(i.toString());
+                }
             }
+            System.out.println("* end of event calendar *");
+        }
+        else{
+            System.out.println("Event calendar is empty!");
         }
 
     }
@@ -214,14 +221,16 @@ public class EventCalendar {
             } while (swap);
 
 
+            System.out.println("* Event calendar by event date and start time *");
             for(Event i : dateSorted){
                 if(i != null){
                     System.out.println(i.toString());
                 }
             }
+            System.out.println("* end of event calendar *");
         }
         else{
-            System.out.println("Event Calendar Empty!");
+            System.out.println("Event calendar is empty!");
         }
     }
 
@@ -270,14 +279,16 @@ public class EventCalendar {
                 }
             } while (swap);
 
+            System.out.println("* Event calendar by campus and building *");
             for(Event i : nameSorted){
                 if(i != null){
                     System.out.println(i.toString());
                 }
             }
+            System.out.println("* end of event calendar *");
         }
         else{
-            System.out.println("Event Calendar Empty!");
+            System.out.println("Event calendar is empty!");
         }
     }
 
@@ -312,14 +323,16 @@ public class EventCalendar {
                 }
             } while (swap);
 
+            System.out.println("* Event calendar by department *");
             for(Event i : deptSorted){
                 if(i != null){
                     System.out.println(i.toString());
                 }
             }
+            System.out.println("* end of event calendar *");
         }
         else{
-            System.out.println("Event Calendar Empty!");
+            System.out.println("Event calendar is empty!");
         }
     }
 

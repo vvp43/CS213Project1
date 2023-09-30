@@ -121,10 +121,6 @@ public class EventOrganizer {
          */
         Date date = e.getDate();
         if (!date.isValid()){
-            int month = date.getMonth();
-            int day = date.getDay();
-            int year = date.getYear();
-            System.out.println(month+"/"+day+"/"+year+": Invalid calendar date!");
             return;
         }
 
@@ -235,26 +231,13 @@ public class EventOrganizer {
      *operationP() method
      */
     private void operationP(EventCalendar ec){
-        if(ec.getEvent()==null){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
-
-        System.out.println("* Event calendar *");
         ec.print();
-        System.out.println("* end of event calendar *");
     }
 
     /**
      * operationPE() method
      */
     private void operationPE(EventCalendar ec){
-        if(ec.getEvent()==null){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
-
-        System.out.println("* Event calendar by event date and start time *");
         ec.printByDate();
     }
 
@@ -262,12 +245,6 @@ public class EventOrganizer {
      * operationPC() method
      */
     private void operationPC(EventCalendar ec){
-        if(ec.getEvent()==null){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
-
-        System.out.println("* Event calendar by campus and building *");
         ec.printByCampus();
     }
 
@@ -275,12 +252,6 @@ public class EventOrganizer {
      * operationPD() method
      */
     private void operationPD(EventCalendar ec){
-        if(ec.getEvent()==null){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
-
-        System.out.println("* Event calendar by department *");
         ec.printByDepartment();
     }
 

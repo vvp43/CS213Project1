@@ -30,21 +30,21 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
     /**
      * getYear() method
      */
-    public int getYear(){
+    public int getYear() {
         return this.year;
     }
 
     /**
      * getMonth() method
      */
-    public int getMonth(){
+    public int getMonth() {
         return this.month;
     }
 
     /**
      * getDay() method
      */
-    public int getDay(){
+    public int getDay() {
         return this.day;
     }
 
@@ -76,128 +76,148 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      */
     @Override
     public int compareTo(Date input) {
-        int i = input.year * 10000 + input.month *100 + input.day;
-        int e = this.year * 10000 + this.month * 100 + this.day;
-        int diff = i-e;
+        int inputDateInt = input.year * 10000 + input.month * 100 + input.day;
+        int currentDateInt = this.year * 10000 + this.month * 100 + this.day;
+        int diff = currentDateInt - inputDateInt;
 
-        return Integer.compare(diff, 0);
+        if(diff>0) {
+            return 1;
+        }
+
+        if(diff== 0){
+            return 0;
+        }
+
+        return -1;
     }
-
 
 
     /**
      * isLeapYear method()
+     *
      * @param int year
      * @return boolean true or false
      */
-    public boolean isLeapYear(int year) {
+    private boolean isLeapYear(int year) {
         boolean is_Leap = false;
-        if(year % 4 == 0) {
-            if(year % 100 ==0) {
-                if(year % 400==0){
-                    is_Leap =true;
+        if (year % 4 == 0) {
+            if (year % 100 == 0) {
+                if (year % 400 == 0) {
+                    is_Leap = true;
                 }
-            }else{
-                is_Leap=true;
+            } else {
+                is_Leap = true;
             }
         }
         return is_Leap;
     }
 
     /**
-     * isValidDay() method : used to check if the day is valid in a month
-     * @param int day
+     * isValidDate() method : used to check if the day is valid in a month
+     *
+     * @param int year, int month, int day
      * @return boolean true or false
      */
-    public boolean isValidDay(int year, int month, int day) {
-        switch (month){
-            case 1, 3, 5, 7, 8 ,10, 12:
-                return day <= 31 && day > 0;
-            case 4, 6, 9, 11:
-                return day <= 30 && day > 0;
-            case 2:
-                if (isLeapYear(year)) return day <= 29 && day > 0;
-                else return day<=28 && day>0;
-            default:
-                return true;
-        }
-    }
-
-    /**
-     * isValidMonth() method: used to check if the month is valid in a year
-     * @param int year
-     * @return boolean true or false
-     */
-    public boolean isValidMonth(int month){
-        return month > 0 && month < 13;
-    }
-
-    /**
-     * isValid() method
-     *NOTE: THIS METHOD IS NOT COMPLETE,
-     *still need to test for a valid calendar date and return an error, like 13/32/2005
-     */
-    public boolean isValid() {
-        int y = this.year;
-        int m = this.month;
-        int d = this.day;
-        Date thisEvent = new Date(y,m,d);
-        //1st step: checks if event date is valid
-        if(isValidDay(y, m, d) && isValidMonth(m)){
-        //2nd step: checks if event date is in the past
-            Calendar temp = Calendar.getInstance();
-            temp.add(Calendar.MONTH, 6); // add 6 months to current date for next part
-            if(event.after(temp)){ // check to see if event date is within 6 months of the current date
-                return false;
-            }
-            //3rd step: checks if  event date is replicated
-            else {
-                EventCalendar eventCalendar = new EventCalendar();
-                Event[] listOfEvents = eventCalendar.getEvent();
-                if(listOfEvents!= null){
-                    for (Event listOfEvent : listOfEvents) {
-                        if (listOfEvent.getDate().compareTo(thisEvent) == 0) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
+    private boolean isValidDate(Date date) {
+        int year = date.getYear();
+        int month = date.getMonth();
+        int day = date.getDay();
+        if (month > 0 && month < 13) {
+            switch (month) {
+                case 1, 3, 5, 7, 8, 10, 12:
+                    return day <= 31 && day > 0;
+                case 4, 6, 9, 11:
+                    return day <= 30 && day > 0;
+                case 2:
+                    if (isLeapYear(year)) return day <= 29 && day > 0;
+                    else return day <= 28 && day > 0;
+                default:
+                    return true;
             }
         }
         return false;
     }
 
     /**
+     * isFutureDate() method
+     */
+    private boolean isFutureDate(Date inputDate) {
+        int currentYear = inputDate.curr.get(Calendar.YEAR);
+        int currentMonth = inputDate.curr.get(Calendar.MONTH) + 1;
+        int currentDay = inputDate.curr.get(Calendar.DAY_OF_MONTH);
+        Date currentDate = new Date(currentYear, currentMonth, currentDay);
+        return inputDate.compareTo(currentDate) > 0;
+    }
+
+    /**
+     * isWithinSixMonths() method
+     */
+    private boolean isWithinSixMonths(Date inputDate) {
+        if (isFutureDate(inputDate)) {
+            Calendar temp = Calendar.getInstance();
+            temp.add(Calendar.MONTH, 7);
+            return !inputDate.event.after(temp);
+        }
+        return false;
+    }
+
+    /**
+     * isDuplicated() method
+     */
+    private boolean isDuplicated(Date inputDate) {
+        EventCalendar eventCalendar = new EventCalendar();
+        Event[] listOfEvents = eventCalendar.getEvent();
+        if (listOfEvents != null) {
+            for (Event listOfEvent : listOfEvents) {
+                if (listOfEvent.getDate().compareTo(inputDate) == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * isValid() method
+     * NOTE: THIS METHOD IS NOT COMPLETE,
+     * still need to test for a valid calendar date and return an error, like 13/32/2005
+     */
+    public boolean isValid() {
+        int y = this.year;
+        int m = this.month;
+        int d = this.day;
+        Date thisEvent = new Date(y, m, d);
+        //1st step: checks if event date is valid
+        if(isValidDate(thisEvent)){
+            //2nd step: checks if event date is in the future
+            if(isFutureDate(thisEvent)){
+                //3rd step: check if event date is within 6 months
+                if (isWithinSixMonths(thisEvent)){
+                    //4th step: check if event date is duplicated
+                    if(!isDuplicated(thisEvent)){
+                        return true;
+                    }else{
+                        System.out.println("The event is already on the calendar.");
+                    }
+                }else {
+                    System.out.println(m+"/"+d+"/"+y+": Event date must be within 6 months!");
+                    return false;
+                }
+            } else {
+                System.out.println(m+"/"+d+"/"+y+": Event date must be a future date!");
+                return false;
+            }
+        }
+        System.out.println(m+"/"+d+"/"+y+": Invalid calendar date!");
+        return false;
+    }
+
+    /**
      * testbed main()
+     *
      * @param args
      */
     public static void main(String[] args) {
-        Date a = new Date(2023, 9, 31);
-        Date b = new Date(2023, 9, 29);
-        Date c = new Date(2024, 2, 29);
-
-        Date d = new Date(2024, 2, 29);
-        System.out.println(a.isLeapYear(a.year));
-        Calendar date = Calendar.getInstance();
-//        date.set(2023, 9, 31);
-//        int y = date.get(Calendar.YEAR);
-//        int m = date.get(Calendar.MONTH);
-//        int d = date.get(Calendar.DAY_OF_MONTH);
-        System.out.println(a.month+"/"+a.day+"/"+a.year);
-        System.out.println(a.isValidMonth(a.month));
-        System.out.println(a.isValidDay(a.year, a.month, a.day));
-        System.out.println(b.isValidDay(b.year, b.month, b.day));
-        System.out.println(c.isValidDay(c.year, c.month, c.day));
-
-        System.out.println(a.compareTo(b));
-        System.out.println(b.compareTo(a));
-        System.out.println(a.compareTo(a));
-
-        System.out.println(c.compareTo(d));
-        System.out.println(b.isValid());
-
-
-
-
+        System.out.println("Vinh");
     }
 }

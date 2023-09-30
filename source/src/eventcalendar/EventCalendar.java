@@ -57,6 +57,26 @@ public class EventCalendar {
 
     } //increase the capacity by 4
 
+    /**
+     * isEmpty() method
+     */
+    private boolean isEmpty(){
+        boolean check = true;
+
+        if(events == null){
+            check = true;
+        }
+        else{
+            for(Event i : events){
+                if(i != null){
+                    check = false;
+                }
+            }
+        }
+        return check;
+    }
+
+
 
     /**
         add() method
@@ -160,19 +180,27 @@ public class EventCalendar {
      * print() method
      */
     public void print() {
-        for(Event i : events){
-            if(i != null){
-                System.out.println(i.toString());
+        if(!isEmpty()){
+            System.out.println("* Event calendar *");
+            for(Event i : events){
+                if(i != null){
+                    System.out.println(i.toString());
+                }
             }
+            System.out.println("* end of event calendar *");
+        }
+        else{
+            System.out.println("Event calendar is empty!");
         }
 
     }
+
 
     /**
      * printByDate() method
      */
     public void printByDate() {
-        if(events[0] != null) {
+        if(!isEmpty()) {
             Event[] dateSorted = new Event[numEvents];
 
             // copy array first
@@ -198,20 +226,24 @@ public class EventCalendar {
             } while (swap);
 
 
+            System.out.println("* Event calendar by event date and start time *");
             for(Event i : dateSorted){
                 if(i != null){
                     System.out.println(i.toString());
                 }
             }
+            System.out.println("* end of event calendar *");
         }
-
+        else{
+            System.out.println("Event calendar is empty!");
+        }
     }
 
     /**
      * printByCampus() method
      */
     public void printByCampus() {
-        if(events[0] != null) {
+        if(!isEmpty()) {
             Event[] nameSorted = new Event[numEvents];
 
             // copy array first
@@ -252,14 +284,16 @@ public class EventCalendar {
                 }
             } while (swap);
 
+            System.out.println("* Event calendar by campus and building *");
             for(Event i : nameSorted){
                 if(i != null){
                     System.out.println(i.toString());
                 }
             }
+            System.out.println("* end of event calendar *");
         }
         else{
-            System.out.println("Event Calendar Empty!");
+            System.out.println("Event calendar is empty!");
         }
     }
 
@@ -267,7 +301,7 @@ public class EventCalendar {
      * printByDepartment() method
      */
     public void printByDepartment() {
-        if (events[0] != null) {
+        if (!isEmpty()) {
             Event[] deptSorted = new Event[numEvents];
 
             // copy array first
@@ -294,14 +328,18 @@ public class EventCalendar {
                 }
             } while (swap);
 
+            System.out.println("* Event calendar by department *");
             for(Event i : deptSorted){
                 if(i != null){
                     System.out.println(i.toString());
                 }
             }
+            System.out.println("* end of event calendar *");
+        }
+        else{
+            System.out.println("Event calendar is empty!");
         }
     }
-
     public static void main(String[] args) {
         EventCalendar cal = new EventCalendar();
 

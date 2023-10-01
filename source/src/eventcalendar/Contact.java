@@ -12,9 +12,8 @@ public class Contact {
 
     /**
      * Default constructor
-     *
-     * @param department
-     * @param email
+     * @param department department info
+     * @param email email of department
      */
     public Contact(Department department, String email) {
         this.department = department;
@@ -43,6 +42,7 @@ public class Contact {
     /**
      * isValid() method
      * checks for whether given email is in rutgers domain and from one of 5 departments
+     * @return true if contact info is valid
      */
     public boolean isValid() {
         if (email.contains("@rutgers.edu")) {

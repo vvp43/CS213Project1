@@ -8,7 +8,7 @@ import java.util.Calendar;
  *
  * @author Seth Yeh, Vinh Pham
  */
-public class Date implements Comparable<Date> { // <--- no idea what this does
+public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
@@ -18,9 +18,9 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
     /**
      * Constructor with param year, month and day
      *
-     * @param year
-     * @param month
-     * @param day
+     * @param year event year
+     * @param month event month
+     * @param day event day
      */
     public Date(int year, int month, int day) {
         this.year = year;
@@ -31,6 +31,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * getYear() method
+     * @return year
      */
     public int getYear() {
         return this.year;
@@ -38,6 +39,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * getMonth() method
+     * @return month
      */
     public int getMonth() {
         return this.month;
@@ -45,37 +47,18 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * getDay() method
+     * @return day
      */
     public int getDay() {
         return this.day;
     }
 
     /**
-     * add() method
-     *
-     * @param minutes
-     * @return
-     */
-    public String add(int minutes) {
-        Calendar temp = Calendar.getInstance();
-        temp = event;
-        temp.add(Calendar.MINUTE, minutes);
-
-        int hour = temp.get(Calendar.HOUR);
-        int min = temp.get(Calendar.MINUTE);
-
-        String ampm = (temp.get(Calendar.AM_PM) == Calendar.AM) ? "am" : "pm";
-        hour = (hour == 0) ? 12 : hour;
-
-        return hour + ":" + minutes + ampm;
-    }
-
-    /**
      * compareTo() method
-     * vinh
+     *
      *
      * @param input the object to be compared.
-     * @return
+     * @return 1 if current date is after input date, 0 if current date is the same with output date, -1 if current date is before input date
      */
     @Override
     public int compareTo(Date input) {
@@ -99,7 +82,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      * isLeapYear method()
      * checks if year is a leap year
      *
-     * @param year to check
+     * @param year year to check
      * @return true if it is, false otherwise
      */
     private boolean isLeapYear(int year) {
@@ -120,7 +103,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      * isValidDate() method : used to check if the day is valid in a month
      * vinh
      *
-     * @param date
+     * @param date date to check
      * @return boolean true or false
      */
     private boolean isValidDate(Date date) {
@@ -214,26 +197,29 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
     }
 
     /**
-     * testbed main()
+     * Testbed main()
      *
-     * @param args
      */
     public static void main(String[] args) {
-        /*
+        /**
         Demonstrate test case for isValid()
         isValid() is designed based on three conditions
-        1. The date is valid (has to be proper date and month depending on leap or non leap year)
+        1. The date is valid ( )
         2. The date is in the future
         3. The date is within 6 months;
          */
 
-        //Example Dates (Today's date: 9/30/2023)
+        /**
+         * Example Dates (Today's date: 9/30/2023)
+         */
         Date a = new Date(2024, 2, 29);
         Date b = new Date(2023, 2, 29);
         Date c = new Date(2022, 2, 29);
         Date d = new Date(2025, 3, 31);
 
-        //1. The date is valid (has to be proper date and month depending on leap or non leap year)
+        /**
+         * 1. The date is valid (has to be proper date and month depending on leap or non leap year)
+         */
         System.out.println("* Test Case 1 *");
         System.out.println(a.isValidDate(a));
         System.out.println(b.isValidDate(b));
@@ -241,7 +227,9 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         System.out.println(d.isValidDate(d));
         System.out.println();
 
-        //2. The date is in the future
+        /**
+         * 2. The date is in the future
+         */
         System.out.println("* Test Case 2 *");
         System.out.println(a.isFutureDate(a));
         System.out.println(b.isFutureDate(b));
@@ -249,7 +237,10 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
         System.out.println(d.isFutureDate(d));
         System.out.println();
 
-        //3. The date is within 6 months
+        /**
+         *  3. The date is within 6 months
+         */
+
         System.out.println("* Test Case 3 *");
         System.out.println(a.isWithinSixMonths(a));
         System.out.println(b.isWithinSixMonths(b));

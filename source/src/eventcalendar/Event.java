@@ -3,7 +3,7 @@ package eventcalendar;
 import java.util.Calendar;
 
 /**
- * This class defines the instance variables, constructors, a
+ * This class defines the instance variables, constructors, and methods that are related to Event
  *
  * @author Seth Yeh, Vinh Pham
  */
@@ -33,10 +33,6 @@ public class Event implements Comparable<Event> {
 
     /**
      * Constructor with date, startTime, and location as Param
-     *
-     * @param date
-     * @param startTime
-     * @param location
      */
     public Event(Date date, Timeslot startTime, Location location) {
         this.date = date;
@@ -46,6 +42,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Date getter method
+     * @return Date of event
      */
     public Date getDate() {
         return this.date;
@@ -53,6 +50,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Location getter method
+     * @return Location of event
      */
     public Location getLocation() {
         return this.location;
@@ -60,6 +58,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Contact getter method
+     * @return Contact info of event
      */
     public Contact getContact() {
         return this.contact;
@@ -67,6 +66,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * startTime getter method
+     * @return Starting time of event
      */
     public Timeslot getStartTime() {
         return this.startTime;
@@ -74,6 +74,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Duration getter method
+     * @return Duration of event
      */
     public int getDuration() {
         return this.duration;
@@ -82,9 +83,9 @@ public class Event implements Comparable<Event> {
     /**
      * This method is used to calculate endTime
      *
-     * @param startHour
-     * @param startMin
-     * @param dur
+     * @param startHour Starting Time of event
+     * @param startMin Starting Minute of event
+     * @param dur Duration of event
      * @return an array of endTime where endTime[0] is hour and endTime[1] is minute
      */
     public int[] endTime(int startHour, int startMin, int dur) {
@@ -171,15 +172,43 @@ public class Event implements Comparable<Event> {
      */
     @Override
     public boolean equals(Object event) {
-        Event realEvent = (Event) event;
-        if (this.date.compareTo(realEvent.date) == 0) {
-            if (this.startTime.compareTo(realEvent.startTime) == 0) {
-                return this.location.compareTo(realEvent.location) == 0;
+        Event otherEvent = (Event) event;
+        if (this.date.compareTo(otherEvent.date) == 0) {
+            if (this.startTime.compareTo(otherEvent.startTime) == 0) {
+                return this.location.compareTo(otherEvent.location) == 0;
             } else {
                 return false;
             }
         } else {
             return false;
         }
+    }
+
+    /**
+     * Testbed main()
+     */
+    public static void main(String[] args) {
+        /**
+         *Demonstrate equals() method
+         */
+        Date dateA = new Date(2023, 02, 24);
+        Timeslot startTimeA = Timeslot.MORNING;
+        Location locationA = Location.HLL114;
+        Event eventA = new Event(dateA, startTimeA, locationA);
+
+        Date dateB = new Date(2023, 02, 24);
+        Timeslot startTimeB = Timeslot.MORNING;
+        Location locationB = Location.HLL114;
+        Event eventB = new Event(dateB, startTimeB, locationB);
+
+        Date dateC = new Date(2023, 02, 24);
+        Timeslot startTimeC = Timeslot.AFTERNOON;
+        Location locationC = Location.HLL114;
+        Event eventC = new Event(dateC, startTimeC, locationC);
+
+        System.out.println(eventA.equals(eventB));
+        System.out.println(eventA.equals(eventC));
+        System.out.println(eventB.equals(eventC));
+
     }
 }

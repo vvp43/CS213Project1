@@ -9,10 +9,9 @@ import java.util.Scanner;
  */
 public class EventOrganizer {
     /**
-     * isValidCommand()
-     *
-     * @param command
-     * @return boolean true or false
+     * isValidCommand() method checks if user's input is valid
+     * @param command user's input
+     * @return true if command is valid and false if command is invalid
      */
     public boolean isValidCommand(String command) {
         return command.equals("A") || command.equals("R") || command.equals("P")
@@ -21,23 +20,26 @@ public class EventOrganizer {
     }
 
     /**
-     * createEventObj() method
+     * createDateFromString() method
+     * @param date String of date contains month, day, year
+     * @return Date object
      */
-    private Event createEventObj(String date, String timeSlot, String location, String department, String email, String duration) {
-        /*
-        Date
-         */
+    private Date createDateFromString(String date){
         //Split date string into array contains month, day, year
         String[] dateArr = date.split("/");
         int month = Integer.parseInt(dateArr[0]);
         int day = Integer.parseInt(dateArr[1]);
         int year = Integer.parseInt(dateArr[2]);
-        //Create Date object
-        Date dateObj = new Date(year, month, day);
+        //Create Date object and return
+        return new Date(year, month, day);
+    }
 
-        /*
-        Timeslot
-         */
+    /**
+     * createTimeSlotFromString() method
+     * @param timeSlot String of timeslot
+     * @return Timeslot object
+     */
+    private Timeslot createTimeSlotFromString(String timeSlot){
         Timeslot startTime = null;
         timeSlot = timeSlot.toUpperCase();
         switch (timeSlot) {
@@ -51,10 +53,15 @@ public class EventOrganizer {
                 startTime = Timeslot.AFTERNOON;
                 break;
         }
+        return startTime;
+    }
 
-        /*
-        Location
-         */
+    /**
+     * createLocationFromString() method
+     * @param location String of location
+     * @return Location object
+     */
+    private Location createLocationFromString(String location){
         Location room = null;
         switch (location) {
             case "hll114", "HLL114":
@@ -76,10 +83,16 @@ public class EventOrganizer {
                 room = Location.AB2225;
                 break;
         }
+        return room;
+    }
 
-        /*
-        Contact
-         */
+    /**
+     * createContactFromString() method
+     * @param department info of department
+     * @param email full email
+     * @return Contact object
+     */
+    private Contact createContactFromString (String department, String email){
         //Department
         Department dept = null;
         department = department.toUpperCase();
@@ -101,16 +114,36 @@ public class EventOrganizer {
                 break;
         }
         Contact contact = new Contact(dept, email);
+        return contact;
+    }
 
+    /**
+     * createEventObj() method
+     * @param date date of Event
+     * @param timeSlot timeslot of Event
+     * @param location location of Event
+     * @param department department full name
+     * @param email email of department
+     * @param duration duration of Event
+     * @return Event object
+     */
+    private Event createEventObj(String date, String timeSlot, String location, String department, String email, String duration) {
+        //Create Date object
+        Date dateObj = createDateFromString(date);
 
-        /*
-        Duration
-         */
+       //Create Timeslot object
+        Timeslot startTime = createTimeSlotFromString(timeSlot);
+
+        //Create Location object
+        Location room = createLocationFromString(location);
+
+        //Create Contact object
+        Contact contact = createContactFromString(department, email);
+
+        //Duration
         int timeLength = Integer.parseInt(duration);
 
-        /*
-        Create event
-         */
+        //Create event
         return new Event(dateObj, startTime, room, contact, timeLength);
     }
 
@@ -118,32 +151,26 @@ public class EventOrganizer {
      * operationA() method
      */
     private void operationA(Event e, EventCalendar ec) {
-        /*
-        Check if any elements of event is invalid and display error message
-         */
+        //Check if any elements of event is invalid and display error message
         Date date = e.getDate();
         if (!date.isValid()) {
             return;
         }
-
         Timeslot startTime = e.getStartTime();
         if (startTime == null) {
             System.out.println("Invalid time slot!");
             return;
         }
-
         Location location = e.getLocation();
         if (location == null) {
             System.out.println("Invalid location!");
             return;
         }
-
         Contact contact = e.getContact();
         if (!contact.isValid()) {
             System.out.println("Invalid contact information!");
             return;
         }
-
         int duration = e.getDuration();
         if (duration < 30 || duration > 120) {
             System.out.println("Event duration must be at least " +
@@ -151,9 +178,7 @@ public class EventOrganizer {
             return;
         }
 
-        /*
-        Check if the event is duplicated or not
-         */
+        //Check if the event is duplicated or not
         Event[] eventList = ec.getEvent();
         if (eventList != null) {
             for (Event i : eventList) {
@@ -167,24 +192,15 @@ public class EventOrganizer {
         //Add to event calendar array
         ec.add(e);
         System.out.println("Event added to the calendar.");
-
-
     }
 
     /**
      * operationR() method
      */
     private void operationR(String date, String timeSlot, String location, EventCalendar ec) {
-        //Split date string into array contains month, day, year
-        String[] dateArr = date.split("/");
-        int month = Integer.parseInt(dateArr[0]);
-        int day = Integer.parseInt(dateArr[1]);
-        int year = Integer.parseInt(dateArr[2]);
         //Create Date object
-        Date dateObj = new Date(year, month, day);
-        /*
-        Check if any elements of event is invalid and display error message
-         */
+        Date dateObj = createDateFromString(date);
+        //Check if any elements of event is invalid and display error message
         if (!dateObj.isValid()) {
             int m = dateObj.getMonth();
             int d = dateObj.getDay();
@@ -193,49 +209,17 @@ public class EventOrganizer {
             return;
         }
 
-         /*
-        Timeslot
-         */
-        Timeslot startTime = null;
-        timeSlot = timeSlot.toUpperCase();
-        switch (timeSlot) {
-            case "MORNING":
-                startTime = Timeslot.MORNING;
-                break;
-            case "EVENING":
-                startTime = Timeslot.EVENING;
-                break;
-            case "AFTERNOON":
-                startTime = Timeslot.AFTERNOON;
-                break;
-        }
+        //Create Timeslot object
+        Timeslot startTime = createTimeSlotFromString(timeSlot);
 
-        /*
-        Location
-         */
-        Location room = null;
-        switch (location) {
-            case "hll114", "HLL114":
-                room = Location.HLL114;
-                break;
-            case "arc103", "ARC103":
-                room = Location.ARC103;
-                break;
-            case "be_aud", "BE_AUD":
-                room = Location.BE_AUD;
-                break;
-            case "mu302", "MU302":
-                room = Location.MU302;
-                break;
-            case "til232", "TIL232":
-                room = Location.TIL232;
-                break;
-            case "ab2225", "AB2225":
-                room = Location.AB2225;
-                break;
-        }
 
+        //Create Location object
+        Location room = createLocationFromString(location);
+
+        //Create Event object
         Event e = new Event(dateObj, startTime, room);
+
+        //Check if Event object is in the event calendar to remove or not
         if (ec.contains(e)) {
             ec.remove(e);
             System.out.println("Event has been removed from the calendar!");

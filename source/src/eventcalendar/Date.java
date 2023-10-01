@@ -1,9 +1,11 @@
 package eventcalendar;
+
 import java.util.Calendar;
 
 /**
  * This Date class retrieves information
  * about date which contains year, month and day
+ *
  * @author Seth Yeh, Vinh Pham
  */
 public class Date implements Comparable<Date> { // <--- no idea what this does
@@ -70,6 +72,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * compareTo() method
+     * vinh
      *
      * @param input the object to be compared.
      * @return
@@ -94,9 +97,10 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * isLeapYear method()
+     * checks if year is a leap year
      *
-     * @param int year
-     * @return boolean true or false
+     * @param year to check
+     * @return true if it is, false otherwise
      */
     private boolean isLeapYear(int year) {
         boolean is_Leap = false;
@@ -114,6 +118,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * isValidDate() method : used to check if the day is valid in a month
+     * vinh
      *
      * @param int year, int month, int day
      * @return boolean true or false
@@ -139,14 +144,18 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
     }
 
     /**
-     * isFutureDate() method
+     * isFutureDate method()
+     * Checks if date is in the future or not
+     *
+     * @param inputDate date to compare
+     * @return true if inputDate is in the future, false otherwise
      */
     private boolean isFutureDate(Date inputDate) {
         int currentYear = inputDate.curr.get(Calendar.YEAR);
         int currentMonth = inputDate.curr.get(Calendar.MONTH) + 1;
         int currentDay = inputDate.curr.get(Calendar.DAY_OF_MONTH);
         Date currentDate = new Date(currentYear, currentMonth, currentDay);
-        if(inputDate.isValidDate(inputDate)) {
+        if (inputDate.isValidDate(inputDate)) {
             return inputDate.compareTo(currentDate) > 0;
         }
         return false;
@@ -154,9 +163,13 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * isWithinSixMonths() method
+     * Checks if date is within 6 months of the current date
+     *
+     * @param inputDate date to compare
+     * @return true if inputDate is within 6 months of the current date, false otherwise
      */
     private boolean isWithinSixMonths(Date inputDate) {
-        if(inputDate.isValidDate(inputDate)){
+        if (inputDate.isValidDate(inputDate)) {
             if (isFutureDate(inputDate)) {
                 Calendar temp = Calendar.getInstance();
                 temp.add(Calendar.MONTH, 7);
@@ -170,8 +183,9 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
 
     /**
      * isValid() method
-     * NOTE: THIS METHOD IS NOT COMPLETE,
-     * still need to test for a valid calendar date and return an error, like 13/32/2005
+     * Checks if an event is valid meaning within 6 months, cannot be in the future, and is an actual date possible.
+     *
+     * @return true if all conditions above are met, otherwise false
      */
     public boolean isValid() {
         int y = this.year;

@@ -3,6 +3,7 @@ package eventcalendar;
 /**
  * This contact class is
  * used to retrieve Department and Email info
+ *
  * @author Seth Yeh
  */
 public class Contact {
@@ -10,37 +11,39 @@ public class Contact {
     private String email;
 
     /**
-     * Constructor
+     * Default constructor
+     *
      * @param department
      * @param email
      */
-    public Contact(Department department, String email){
+    public Contact(Department department, String email) {
         this.department = department;
         this.email = email;
     }
 
     /**
      * Getter method for Department
-     * @return
+     *
+     * @return department enum
      */
-    public Department getDepartment(){
+    public Department getDepartment() {
         return department;
     }
 
     /**
      * Getter method for email
-     * @return
+     *
+     * @return email string
      */
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
 
     /**
      * isValid() method
-     *idk if were suppose to check for case sensitivity for department here because contact literally
-     *comes with department as one if its variables
-    */
+     * checks for whether given email is in rutgers domain and from one of 5 departments
+     */
     public boolean isValid() {
         if (email.contains("@rutgers.edu")) {
             String sub = email.substring(0, email.indexOf("@rutgers.edu"));
@@ -51,12 +54,10 @@ public class Contact {
                     || sub.equalsIgnoreCase(String.valueOf(Department.BAIT))) {
 
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
-        }
-        else{
+        } else {
             return false;
         }
     }

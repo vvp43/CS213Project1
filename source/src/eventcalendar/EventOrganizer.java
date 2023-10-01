@@ -1,18 +1,20 @@
 package eventcalendar;
-import java.util.Calendar;
+
 import java.util.Scanner;
 
 /**
  * This class is the user interface class to process the command lines.
+ *
  * @author Seth Yeh, Vinh Pham
  */
 public class EventOrganizer {
     /**
      * isValidCommand()
-     * @param String command
+     *
+     * @param command
      * @return boolean true or false
      */
-    public boolean isValidCommand(String command){
+    public boolean isValidCommand(String command) {
         return command.equals("A") || command.equals("R") || command.equals("P")
                 || command.equals("PE") || command.equals("PC") || command.equals("PD")
                 || command.equals("Q");
@@ -21,7 +23,7 @@ public class EventOrganizer {
     /**
      * createEventObj() method
      */
-    private Event createEventObj(String date, String timeSlot, String location, String department, String email, String duration){
+    private Event createEventObj(String date, String timeSlot, String location, String department, String email, String duration) {
         /*
         Date
          */
@@ -38,7 +40,7 @@ public class EventOrganizer {
          */
         Timeslot startTime = null;
         timeSlot = timeSlot.toUpperCase();
-        switch(timeSlot){
+        switch (timeSlot) {
             case "MORNING":
                 startTime = Timeslot.MORNING;
                 break;
@@ -54,8 +56,8 @@ public class EventOrganizer {
         Location
          */
         Location room = null;
-        switch(location){
-            case "hll114", "HLL114" :
+        switch (location) {
+            case "hll114", "HLL114":
                 room = Location.HLL114;
                 break;
             case "arc103", "ARC103":
@@ -81,7 +83,7 @@ public class EventOrganizer {
         //Department
         Department dept = null;
         department = department.toUpperCase();
-        switch (department){
+        switch (department) {
             case "CS":
                 dept = Department.CS;
                 break;
@@ -115,36 +117,35 @@ public class EventOrganizer {
     /**
      * operationA() method
      */
-    private void operationA(Event e, EventCalendar ec){
-
+    private void operationA(Event e, EventCalendar ec) {
         /*
         Check if any elements of event is invalid and display error message
          */
         Date date = e.getDate();
-        if (!date.isValid()){
+        if (!date.isValid()) {
             return;
         }
 
         Timeslot startTime = e.getStartTime();
-        if(startTime==null){
+        if (startTime == null) {
             System.out.println("Invalid time slot!");
             return;
         }
 
         Location location = e.getLocation();
-        if(location == null) {
+        if (location == null) {
             System.out.println("Invalid location!");
             return;
         }
 
         Contact contact = e.getContact();
-        if(!contact.isValid()) {
+        if (!contact.isValid()) {
             System.out.println("Invalid contact information!");
             return;
         }
 
         int duration = e.getDuration();
-        if(duration<30 || duration > 120){
+        if (duration < 30 || duration > 120) {
             System.out.println("Event duration must be at least " +
                     "30 minutes and at most 120 minutes");
             return;
@@ -154,7 +155,7 @@ public class EventOrganizer {
         Check if the event is duplicated or not
          */
         Event[] eventList = ec.getEvent();
-        if(eventList!=null) {
+        if (eventList != null) {
             for (Event i : eventList) {
                 if (i.equals(e)) {
                     System.out.println("The event is already on the calendar.");
@@ -168,13 +169,12 @@ public class EventOrganizer {
         System.out.println("Event added to the calendar.");
 
 
-
     }
 
     /**
      * operationR() method
      */
-    private void operationR(String date, String timeSlot, String location, EventCalendar ec ){
+    private void operationR(String date, String timeSlot, String location, EventCalendar ec) {
         //Split date string into array contains month, day, year
         String[] dateArr = date.split("/");
         int month = Integer.parseInt(dateArr[0]);
@@ -185,11 +185,11 @@ public class EventOrganizer {
         /*
         Check if any elements of event is invalid and display error message
          */
-        if (!dateObj.isValid()){
+        if (!dateObj.isValid()) {
             int m = dateObj.getMonth();
             int d = dateObj.getDay();
             int y = dateObj.getYear();
-            System.out.println(m+"/"+d+"/"+y+": Invalid calendar date!");
+            System.out.println(m + "/" + d + "/" + y + ": Invalid calendar date!");
             return;
         }
 
@@ -197,8 +197,8 @@ public class EventOrganizer {
         Timeslot
          */
         Timeslot startTime = null;
-        timeSlot= timeSlot.toUpperCase();
-        switch(timeSlot){
+        timeSlot = timeSlot.toUpperCase();
+        switch (timeSlot) {
             case "MORNING":
                 startTime = Timeslot.MORNING;
                 break;
@@ -214,8 +214,8 @@ public class EventOrganizer {
         Location
          */
         Location room = null;
-        switch(location){
-            case "hll114", "HLL114" :
+        switch (location) {
+            case "hll114", "HLL114":
                 room = Location.HLL114;
                 break;
             case "arc103", "ARC103":
@@ -239,36 +239,36 @@ public class EventOrganizer {
         if (ec.contains(e)) {
             ec.remove(e);
             System.out.println("Event has been removed from the calendar!");
-        }else {
+        } else {
             System.out.println("Cannot remove; event is not in the calendar! ");
         }
     }
 
     /**
-     *operationP() method
+     * operationP() method
      */
-    private void operationP(EventCalendar ec){
+    private void operationP(EventCalendar ec) {
         ec.print();
     }
 
     /**
      * operationPE() method
      */
-    private void operationPE(EventCalendar ec){
+    private void operationPE(EventCalendar ec) {
         ec.printByDate();
     }
 
     /**
      * operationPC() method
      */
-    private void operationPC(EventCalendar ec){
+    private void operationPC(EventCalendar ec) {
         ec.printByCampus();
     }
 
     /**
      * operationPD() method
      */
-    private void operationPD(EventCalendar ec){
+    private void operationPD(EventCalendar ec) {
         ec.printByDepartment();
     }
 
@@ -278,30 +278,29 @@ public class EventOrganizer {
     public void run() {
         System.out.println("Event Organizer running...\n");
         Scanner scanObj = new Scanner(System.in);
-        //Commands are in uppercase letter(s) and case-sensitive,
-        //which means the commands in lowercase letters are invalid.
         boolean programRun = true;
         EventCalendar eventCalendar = new EventCalendar();
-        while(programRun){
+        while (programRun) {
             String command = scanObj.nextLine();
+            if (command.equals("")) continue;
             String[] inputList = command.replaceAll("(^\\s+|\\s+$)", "").split("\\s+");//split the whole line into elements of String array
             String firstCMD = inputList[0];
-            if(!isValidCommand(firstCMD)){
+            if (!isValidCommand(firstCMD)) {
                 System.out.println(firstCMD + " is an invalid command!");
-            }else{
-                switch (firstCMD){
+            } else {
+                switch (firstCMD) {
                     case "Q":
                         programRun = false;
                         System.out.println("Event Organizer terminated.");
                         break;
                     case "A":
-                        String aDate= inputList[1];
+                        String aDate = inputList[1];
                         String aTimeSlot = inputList[2];
                         String aLocation = inputList[3];
                         String aDepartment = inputList[4];
                         String aEmail = inputList[5];
                         String aDuration = inputList[6];
-                        Event aEvent = createEventObj(aDate, aTimeSlot,aLocation,aDepartment,aEmail, aDuration);
+                        Event aEvent = createEventObj(aDate, aTimeSlot, aLocation, aDepartment, aEmail, aDuration);
                         operationA(aEvent, eventCalendar);
                         break;
                     case "R":
@@ -322,9 +321,9 @@ public class EventOrganizer {
                     case "PE":
                         operationPE(eventCalendar);
                         break;
+
                 }
             }
         }
-
     }
 }

@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class EventOrganizer {
     /**
      * isValidCommand() method checks if user's input is valid
+     *
      * @param command user's input
      * @return true if command is valid and false if command is invalid
      */
@@ -21,10 +22,11 @@ public class EventOrganizer {
 
     /**
      * createDateFromString() method
+     *
      * @param date String of date contains month, day, year
      * @return Date object
      */
-    private Date createDateFromString(String date){
+    private Date createDateFromString(String date) {
         //Split date string into array contains month, day, year
         String[] dateArr = date.split("/");
         int month = Integer.parseInt(dateArr[0]);
@@ -36,10 +38,11 @@ public class EventOrganizer {
 
     /**
      * createTimeSlotFromString() method
+     *
      * @param timeSlot String of timeslot
      * @return Timeslot object
      */
-    private Timeslot createTimeSlotFromString(String timeSlot){
+    private Timeslot createTimeSlotFromString(String timeSlot) {
         Timeslot startTime = null;
         timeSlot = timeSlot.toUpperCase();
         switch (timeSlot) {
@@ -58,10 +61,11 @@ public class EventOrganizer {
 
     /**
      * createLocationFromString() method
+     *
      * @param location String of location
      * @return Location object
      */
-    private Location createLocationFromString(String location){
+    private Location createLocationFromString(String location) {
         Location room = null;
         switch (location) {
             case "hll114", "HLL114":
@@ -88,11 +92,12 @@ public class EventOrganizer {
 
     /**
      * createContactFromString() method
+     *
      * @param department info of department
-     * @param email full email
+     * @param email      full email
      * @return Contact object
      */
-    private Contact createContactFromString (String department, String email){
+    private Contact createContactFromString(String department, String email) {
         //Department
         Department dept = null;
         department = department.toUpperCase();
@@ -119,19 +124,20 @@ public class EventOrganizer {
 
     /**
      * createEventObj() method
-     * @param date date of Event
-     * @param timeSlot timeslot of Event
-     * @param location location of Event
+     *
+     * @param date       date of Event
+     * @param timeSlot   timeslot of Event
+     * @param location   location of Event
      * @param department department full name
-     * @param email email of department
-     * @param duration duration of Event
+     * @param email      email of department
+     * @param duration   duration of Event
      * @return Event object
      */
     private Event createEventObj(String date, String timeSlot, String location, String department, String email, String duration) {
         //Create Date object
         Date dateObj = createDateFromString(date);
 
-       //Create Timeslot object
+        //Create Timeslot object
         Timeslot startTime = createTimeSlotFromString(timeSlot);
 
         //Create Location object

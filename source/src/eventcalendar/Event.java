@@ -42,6 +42,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Date getter method
+     *
      * @return Date of event
      */
     public Date getDate() {
@@ -50,6 +51,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Location getter method
+     *
      * @return Location of event
      */
     public Location getLocation() {
@@ -58,6 +60,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Contact getter method
+     *
      * @return Contact info of event
      */
     public Contact getContact() {
@@ -66,6 +69,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * startTime getter method
+     *
      * @return Starting time of event
      */
     public Timeslot getStartTime() {
@@ -74,6 +78,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Duration getter method
+     *
      * @return Duration of event
      */
     public int getDuration() {
@@ -84,8 +89,8 @@ public class Event implements Comparable<Event> {
      * This method is used to calculate endTime
      *
      * @param startHour Starting Time of event
-     * @param startMin Starting Minute of event
-     * @param dur Duration of event
+     * @param startMin  Starting Minute of event
+     * @param dur       Duration of event
      * @return an array of endTime where endTime[0] is hour and endTime[1] is minute
      */
     public int[] endTime(int startHour, int startMin, int dur) {

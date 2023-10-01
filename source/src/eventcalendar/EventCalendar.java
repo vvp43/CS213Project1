@@ -22,13 +22,14 @@ public class EventCalendar {
     }
 
     /**
-     * Events[] getter
+     * events[] getter
      */
     public Event[] getEvent (){
         return this.events;
     }
 
     /**
+     * find() method
      * Finds if an event is present in the events array
      * @param e event to find in events array
      * @return i the index of the event found, or NOT_FOUND (-1) if not.
@@ -45,6 +46,7 @@ public class EventCalendar {
     }
 
     /**
+     *  grow() method
      *  Increases array size of events by 4
      */
     private void grow() {
@@ -60,6 +62,7 @@ public class EventCalendar {
     }
 
     /**
+     *  isEmpty() method
      *  Checks if eventsArray is empty or not initialized
      */
     private boolean isEmpty(){
@@ -81,6 +84,7 @@ public class EventCalendar {
 
 
     /**
+     *  add() method
         Adds an event to the events array
         @param e event to be added
         @return true if successfully added, false if already present
@@ -163,6 +167,7 @@ public class EventCalendar {
     }
 
     /**
+     * contains() method
      * Checks if an event is contained within the events array
      * @param e the event to check for
      * @return NOT_FOUND if not found within, true if it is
@@ -172,6 +177,7 @@ public class EventCalendar {
     }
 
     /**
+     * print() method for events[]
      * Prints the events in the local variable events
      * Prints empty if calendar is empty
      */
@@ -192,6 +198,7 @@ public class EventCalendar {
     }
 
     /**
+     * print() method for outside event arrays
      * Prints an events list
      * Prints empty if calendar is empty
      * @param e event list to be printed
@@ -211,6 +218,7 @@ public class EventCalendar {
 
     }
     /**
+     * copy() method
      * Copies the events array into a new list of events
      * @return newArr returns new array
      */
@@ -227,6 +235,7 @@ public class EventCalendar {
 
 
     /**
+     * printbyDate() method
      * Prints the events list sorted by date
      */
     public void printByDate() {
@@ -268,6 +277,7 @@ public class EventCalendar {
     }
 
     /**
+     * printbyCampus method()
      * Prints the events list sorted by building name and campus name
      */
     public void printByCampus() {

@@ -22,16 +22,16 @@ public class EventCalendar {
     }
 
     /**
-     * events getter
+     * Events[] getter
      */
     public Event[] getEvent (){
         return this.events;
     }
 
     /**
-     * find() method
-     * @param event
-     * @return
+     * Finds if an event is present in the events array
+     * @param e event to find in events array
+     * @return i the index of the event found, or NOT_FOUND (-1) if not.
      */
     private int find(Event e) {
         for(int i = 0; i < numEvents; i++){
@@ -42,10 +42,10 @@ public class EventCalendar {
             }
         }
         return NOT_FOUND;
-    } //search an event in the list
+    }
 
     /**
-     * grow() method
+     *  Increases array size of events by 4
      */
     private void grow() {
         int newNumofEvents = numEvents+4;
@@ -57,10 +57,10 @@ public class EventCalendar {
         events = newEvents;
         numEvents = newNumofEvents;
 
-    } //increase the capacity by 4
+    }
 
     /**
-     * isEmpty() method
+     *  Checks if eventsArray is empty or not initialized
      */
     private boolean isEmpty(){
         boolean check = true;
@@ -81,19 +81,18 @@ public class EventCalendar {
 
 
     /**
-        add() method
-        NOTE: dont know if add works yet, need to figure out if theres an easier way to implement
-        add using grow without having to reuse code.
-
+        Adds an event to the events array
+        @param e event to be added
+        @return true if successfully added, false if already present
      */
-    public boolean add(Event event) {
+    public boolean add(Event e) {
         if(numEvents == 0){
             grow();
-            events[0] = event;
+            events[0] = e;
             return true;
         }
         else {
-            if (!contains(event)) {
+            if (!contains(e)) {
                 int temp = -1;
                 for (int i = 0; i < numEvents; i++) {
                     if (events[i] == null) {
@@ -110,10 +109,10 @@ public class EventCalendar {
                             break;
                         }
                     }
-                    events[temp2] = event;
+                    events[temp2] = e;
                     return true;
                 } else {
-                    events[temp] = event;
+                    events[temp] = e;
                     return true;
                 }
             }
@@ -126,18 +125,18 @@ public class EventCalendar {
 
     /**
      * remove() method
-     * @param event
-     * @return
+     * @param e the event to be removed
+     * @return true if e is successfully removed from events, false otherwise
      */
-    public boolean remove(Event event) {
-        if (!contains(event)) {
+    public boolean remove(Event e) {
+        if (!contains(e)) {
             return false;
         }
         else {
             int index = 0;
-            for(Event e : events){
-                if(e != null){
-                    if(e.equals(event)){
+            for(Event i : events){
+                if(i != null){
+                    if(i.equals(e)){
                         break;
                     }
                 }
@@ -164,16 +163,17 @@ public class EventCalendar {
     }
 
     /**
-     * contains() method
-     * @param event
-     * @return
+     * Checks if an event is contained within the events array
+     * @param e the event to check for
+     * @return NOT_FOUND if not found within, true if it is
      */
-    public boolean contains(Event event) {
-        return find(event) != NOT_FOUND;
+    public boolean contains(Event e) {
+        return find(e) != NOT_FOUND;
     }
 
     /**
-     * print() method
+     * Prints the events in the local variable events
+     * Prints empty if calendar is empty
      */
     public void print() {
         if(!isEmpty()){
@@ -191,18 +191,14 @@ public class EventCalendar {
 
     }
 
-    public Event[] copy(){
-        Event[] newArr = new Event[numEvents];
-        for (int i = 0; i < numEvents; i++) {
-            if (events[i] != null) {
-                newArr[i] = events[i];
-            }
-        }
-        return newArr;
-    }
-    public void print(Event[] a) {
+    /**
+     * Prints an events list
+     * Prints empty if calendar is empty
+     * @param e event list to be printed
+     */
+    public void print(Event[] e) {
         if(!isEmpty()){
-            for(Event i : a){
+            for(Event i : e){
                 if(i != null){
                     System.out.println(i.toString());
                 }
@@ -214,9 +210,24 @@ public class EventCalendar {
         }
 
     }
+    /**
+     * Copies the events array into a new list of events
+     * @return newArr returns new array
+     */
+    public Event[] copy(){
+        Event[] newArr = new Event[numEvents];
+        for (int i = 0; i < numEvents; i++) {
+            if (events[i] != null) {
+                newArr[i] = events[i];
+            }
+        }
+        return newArr;
+    }
+
+
 
     /**
-     * printByDate() method
+     * Prints the events list sorted by date
      */
     public void printByDate() {
         if(!isEmpty()) {
@@ -257,7 +268,7 @@ public class EventCalendar {
     }
 
     /**
-     * printByCampus() method
+     * Prints the events list sorted by building name and campus name
      */
     public void printByCampus() {
         if(!isEmpty()) {
@@ -298,7 +309,7 @@ public class EventCalendar {
     }
 
     /**
-     * printByDepartment() method
+     * Prints the events list sorted by department
      */
     public void printByDepartment() {
         if (!isEmpty()) {

@@ -319,6 +319,7 @@ public class EventCalendar {
     }
 
     /**
+     * printbyDepartment() method
      * Prints the events list sorted by department
      */
     public void printByDepartment() {

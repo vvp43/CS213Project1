@@ -99,7 +99,7 @@ public class Event implements Comparable<Event>{
 
     /**
      * toString() method
-     * @return String format
+     * @return Event and its variables in string format
      */
     @Override
     public String toString(){
@@ -133,34 +133,35 @@ public class Event implements Comparable<Event>{
     }
 
     /**
-     * compareTo() method
-     *Not sure what to return if this compareTo fails yet so i put in -1s for a temporary solution
+     * Compares local variable event to given event, e
+     * @param e event to compare
+     * @return 0 if both date and time are equal, -2 if same date but time is before, 2 if same date but time after, -1 if before date, 1 if after date
      */
     @Override
-    public int compareTo (Event a) {
-        if(this.date.compareTo(a.date)==0){
-            if(this.startTime.compareTo(a.startTime)==0){
+    public int compareTo (Event e) {
+        if(this.date.compareTo(e.date)==0){
+            if(this.startTime.compareTo(e.startTime)==0){
                 return 0;//conflicting scheduling
             }
-            else if (this.startTime.compareTo(a.startTime)<0){
+            else if (this.startTime.compareTo(e.startTime)<0){
                 return -2;
             }
             else{
                 return 2;
             }
         }
-        else if(this.date.compareTo(a.date) < 0){
-            //System.out.println("NUH UH");
+        else if(this.date.compareTo(e.date) < 0){
             return -1;
         }
         else{
-            //System.out.println("YUH UH");
             return 1;
         }
     }
 
     /**
-     * equals() method
+     * Checks if two event objects are equal
+     * @param event event to compared to
+     * @return true if date, startTime, and location are equal, otherwise false
      */
     @Override
     public boolean equals(Object event){

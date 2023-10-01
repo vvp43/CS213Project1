@@ -278,20 +278,13 @@ public class EventOrganizer {
                         System.out.println("Event Organizer terminated.");
                         break;
                     case "A":
-                        String aDate = inputList[1];
-                        String aTimeSlot = inputList[2];
-                        String aLocation = inputList[3];
-                        String aDepartment = inputList[4];
-                        String aEmail = inputList[5];
-                        String aDuration = inputList[6];
-                        Event aEvent = createEventObj(aDate, aTimeSlot, aLocation, aDepartment, aEmail, aDuration);
+                        //inputList[i] (i=1 Date, i=2 TimeSlot, i=3 Location, i=4 Department, i=5 email, i=6 duration
+                        Event aEvent = createEventObj(inputList[1], inputList[2], inputList[3], inputList[4], inputList[5], inputList[6]);
                         operationA(aEvent, eventCalendar);
                         break;
                     case "R":
-                        String rDate = inputList[1];
-                        String rTimeSlot = inputList[2];
-                        String rLocation = inputList[3];
-                        operationR(rDate, rTimeSlot, rLocation, eventCalendar);
+                        ////inputList[i] (i=1 Date, i=2 TimeSlot, i=3 Location)
+                        operationR(inputList[1], inputList[2], inputList[3], eventCalendar);
                         break;
                     case "P":
                         operationP(eventCalendar);

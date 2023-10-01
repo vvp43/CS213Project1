@@ -143,10 +143,10 @@ public class Event implements Comparable<Event>{
                 return 0;//conflicting scheduling
             }
             else if (this.startTime.compareTo(a.startTime)<0){
-                return -1;
+                return -2;
             }
             else{
-                return 1;
+                return 2;
             }
         }
         else if(this.date.compareTo(a.date) < 0){

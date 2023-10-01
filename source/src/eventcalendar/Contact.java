@@ -10,7 +10,7 @@ public class Contact {
     private String email;
 
     /**
-     * Constructor
+     * Default constructor
      * @param department
      * @param email
      */
@@ -21,7 +21,7 @@ public class Contact {
 
     /**
      * Getter method for Department
-     * @return
+     * @return department enum
      */
     public Department getDepartment(){
         return department;
@@ -29,7 +29,7 @@ public class Contact {
 
     /**
      * Getter method for email
-     * @return
+     * @return email string
      */
     public String getEmail(){
         return email;
@@ -38,8 +38,7 @@ public class Contact {
 
     /**
      * isValid() method
-     *idk if were suppose to check for case sensitivity for department here because contact literally
-     *comes with department as one if its variables
+     * checks for whether given email is in rutgers domain and from one of 5 departments
     */
     public boolean isValid() {
         if (email.contains("@rutgers.edu")) {

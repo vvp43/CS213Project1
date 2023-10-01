@@ -82,7 +82,9 @@ public class Event implements Comparable<Event> {
     /**
      * This method is used to calculate endTime
      *
-     * @param int duration in min
+     * @param startHour
+     * @param startMin
+     * @param dur
      * @return an array of endTime where endTime[0] is hour and endTime[1] is minute
      */
     public int[] endTime(int startHour, int startMin, int dur) {

@@ -120,7 +120,7 @@ public class Date implements Comparable<Date> { // <--- no idea what this does
      * isValidDate() method : used to check if the day is valid in a month
      * vinh
      *
-     * @param int year, int month, int day
+     * @param date
      * @return boolean true or false
      */
     private boolean isValidDate(Date date) {

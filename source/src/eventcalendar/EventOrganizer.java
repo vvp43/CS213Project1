@@ -208,16 +208,11 @@ public class EventOrganizer {
         Date dateObj = createDateFromString(date);
         //Check if any elements of event is invalid and display error message
         if (!dateObj.isValid()) {
-            int m = dateObj.getMonth();
-            int d = dateObj.getDay();
-            int y = dateObj.getYear();
-            System.out.println(m + "/" + d + "/" + y + ": Invalid calendar date!");
             return;
         }
 
         //Create Timeslot object
         Timeslot startTime = createTimeSlotFromString(timeSlot);
-
 
         //Create Location object
         Location room = createLocationFromString(location);

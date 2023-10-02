@@ -188,10 +188,12 @@ public class EventOrganizer {
         Event[] eventList = ec.getEvent();
         if (eventList != null) {
             for (Event i : eventList) {
-                if (i.equals(e)) {
-                    System.out.println("The event is already on the calendar.");
-                    return;
-                } else break;
+                if(i != null) {
+                    if (i.equals(e)) {
+                        System.out.println("The event is already on the calendar.");
+                        return;
+                    } else break;
+                }
             }
         }
 
@@ -211,7 +213,6 @@ public class EventOrganizer {
             int m = dateObj.getMonth();
             int d = dateObj.getDay();
             int y = dateObj.getYear();
-            System.out.println(m + "/" + d + "/" + y + ": Invalid calendar date!");
             return;
         }
 

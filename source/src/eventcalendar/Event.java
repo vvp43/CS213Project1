@@ -127,7 +127,7 @@ public class Event implements Comparable<Event> {
         if (endTime[1] < 10) { // if endTime minute <10 add a 0
             str3 = endTime[0] + ":" + 0 + endTime[1];
         } else str3 = endTime[0] + ":" + endTime[1];
-        str4 = location + "(" + location.buildingName + ", " + location.campus + ")";
+        str4 = location + " (" + location.buildingName + ", " + location.campus + ")";
         str5 = "" + contact.getDepartment().fullName;
         str6 = "" + contact.getEmail();
 
@@ -142,7 +142,7 @@ public class Event implements Comparable<Event> {
                     "[Contact: %5$s, %6$s]", str1, str2, str3, str4, str5, str6);
         }
         //If startTime is either AFTERNOON or EVENING
-        return String.format("[Event Date: %1$s] [Start: %2$spm] [End:%3$spm] @%4$s " +
+        return String.format("[Event Date: %1$s] [Start: %2$spm] [End: %3$spm] @%4$s " +
                 "[Contact: %5$s, %6$s]", str1, str2, str3, str4, str5, str6);
     }
 
